@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Stack;
 
-public class TaskManager implements Undoable, Redoable{
+public class TaskManager{
     private List<Task> tasks;
     private Stack<Task> undoStack;
     private Stack<Task> redoStack;
@@ -13,11 +13,19 @@ public class TaskManager implements Undoable, Redoable{
         //Todo
     }
 
-    public boolean removeTask(Task task) {
+    public boolean removeTask(int idx) {
         //Todo
     }
 
-    public boolean modifyTask(Task task) {
+    public boolean modifyTask(int idx) {
+        //Todo
+    }
+
+    public List<Task> searchTask(List<Task> tasks, String keyword) {
+        //Todo
+    }
+
+    public void viewTasks() {
         //Todo
     }
 
@@ -34,17 +42,6 @@ public class TaskManager implements Undoable, Redoable{
     }
 
     public boolean markTaskComplete(int idx) {
-        //Todo
-    }
-
-
-    @Override
-    public void redo() {
-        //Todo
-    }
-
-    @Override
-    public void undo() {
         //Todo
     }
 
