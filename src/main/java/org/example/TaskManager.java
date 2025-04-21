@@ -1,8 +1,9 @@
 package org.example;
 
+import org.example.task.Task;
+
 import java.util.Comparator;
 import java.util.List;
-import java.util.Stack;
 
 public class TaskManager{
     private List<Task> tasks;
@@ -24,6 +25,10 @@ public class TaskManager{
     }
 
     public void sortTasks(Comparator<Task> comparator) {
+        //Todo
+    }
+
+    public List<Task> searchTasks(String keyword) {
         //Todo
     }
 

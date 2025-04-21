@@ -1,4 +1,6 @@
-package org.example;
+package org.example.user;
+
+import org.example.cmd.Command;
 
 import java.util.Stack;
 
@@ -13,7 +15,5 @@ public abstract class User {
     public void redo() {
         //Todo
     }
-    public void displayAllTasks() {
-        //Todo
-    }
+    public abstract void displayAllTasks();
 }
