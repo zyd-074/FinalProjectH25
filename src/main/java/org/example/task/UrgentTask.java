@@ -1,8 +1,7 @@
-package org.example;
+package org.example.task;
 
 import java.time.LocalDate;
 import java.util.Comparator;
-import java.util.Date;
 
 public class UrgentTask extends Task {
     private Priority priority;

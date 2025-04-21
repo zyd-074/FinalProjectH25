@@ -1,4 +1,6 @@
-package org.example;
+package org.example.cmd;
+
+import org.example.task.Task;
 
 import java.util.List;
 

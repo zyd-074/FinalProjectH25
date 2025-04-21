@@ -1,4 +1,6 @@
-package org.example;
+package org.example.user;
+
+import org.example.task.Task;
 
 public class StudentUser extends User {
     public void addTask(Task task) {
@@ -21,5 +23,10 @@ public class StudentUser extends User {
     }
     public void loadTasks(String filePath) {
         //Todo
+    }
+
+    @Override
+    public void displayAllTasks() {
+
     }
 }

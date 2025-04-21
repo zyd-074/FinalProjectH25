@@ -1,4 +1,4 @@
-package org.example;
+package org.example.cmd;
 
 public interface Command {
     void undo();
