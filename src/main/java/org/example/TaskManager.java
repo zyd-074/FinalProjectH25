@@ -6,8 +6,6 @@ import java.util.Stack;
 
 public class TaskManager{
     private List<Task> tasks;
-    private Stack<Task> undoStack;
-    private Stack<Task> redoStack;
 
     public boolean addTask(Task task) {
         //Todo
@@ -17,15 +15,15 @@ public class TaskManager{
         //Todo
     }
 
-    public boolean modifyTask(int idx) {
-        //Todo
-    }
-
-    public List<Task> searchTask(List<Task> tasks, String keyword) {
+    public boolean markTaskComplete(int idx) {
         //Todo
     }
 
     public void viewTasks() {
+        //Todo
+    }
+
+    public void sortTasks(Comparator<Task> comparator) {
         //Todo
     }
 
@@ -35,14 +33,6 @@ public class TaskManager{
 
     public void loadFromFile(String filePath) {
         //todo
-    }
-
-    public void sortTasks(Comparator<Task> comparator) {
-        //Todo
-    }
-
-    public boolean markTaskComplete(int idx) {
-        //Todo
     }
 
     public static class PriorityComparator implements Comparator<Task>{
