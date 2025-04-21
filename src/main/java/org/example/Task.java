@@ -2,21 +2,22 @@ package org.example;
 
 import java.time.LocalDate;
 
-public abstract class Task implements Comparable<Task>, Displayable {
-    protected String description;
-    protected LocalDate dueDate;
+public abstract class Task implements Comparable<Task> {
+    protected String title;
+    protected LocalDate createdDate;
     protected boolean isCompleted;
-    protected String category;
+
+    public Task(String title, LocalDate createdDate, boolean isCompleted) {
+        this.title = title;
+        this.createdDate = createdDate;
+        this.isCompleted = isCompleted;
+    }
 
     public void markComplete() {
         //Todo
     }
 
     public int compareTo(Task task) {
-        //Todo
-    }
-
-    public String displayInfo() {
         //Todo
     }
 }
