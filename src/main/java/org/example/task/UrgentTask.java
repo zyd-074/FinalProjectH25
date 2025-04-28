@@ -66,6 +66,14 @@ public class UrgentTask extends Task {
     }
 
     @Override
+    public String toString() {
+        return "UrgentTask{" +
+                "priority=" + priority +
+                ", dueDate=" + dueDate +
+                "} " + super.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -76,14 +84,6 @@ public class UrgentTask extends Task {
     @Override
     public int hashCode() {
         return Objects.hash(priority, dueDate);
-    }
-
-    @Override
-    public String toString() {
-        return "UrgentTask{" +
-                "priority=" + priority +
-                ", dueDate=" + dueDate +
-                "} " + super.toString();
     }
 
     public Priority getPriority() {
