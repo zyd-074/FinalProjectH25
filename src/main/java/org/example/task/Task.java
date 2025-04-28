@@ -1,23 +1,24 @@
 package org.example.task;
 
-import java.time.LocalDate;
+import org.example.cmd.Command;
+import org.example.cmd.MarkCompleteCommand;
 
-public abstract class Task implements Comparable<Task> {
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+public abstract class Task {
     protected String title;
     protected LocalDate createdDate;
     protected boolean isCompleted;
 
-    public Task(String title, LocalDate createdDate, boolean isCompleted) {
+    public Task(String title) {
         this.title = title;
-        this.createdDate = createdDate;
-        this.isCompleted = isCompleted;
+        this.createdDate = LocalDate.now();
+        this.isCompleted = false;
     }
 
     public void markComplete() {
-        //Todo
-    }
-
-    public int compareTo(Task task) {
-        //Todo
+        this.isCompleted = true;
+        //Todo: add command to undo Stack
     }
 }
