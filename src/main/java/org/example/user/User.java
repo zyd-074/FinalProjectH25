@@ -9,11 +9,11 @@ public abstract class User {
     protected Stack<Command> undoStack = new Stack<Command>();
     protected Stack<Command> redoStack = new Stack<Command>();
 
-    public void undo() {
-        //Todo
+    public User(String username) {
+        this.username = username;
+        this.undoStack = new Stack<>();
+        this.redoStack = new Stack<>();
     }
-    public void redo() {
-        //Todo
-    }
+
     public abstract void displayAllTasks();
 }
