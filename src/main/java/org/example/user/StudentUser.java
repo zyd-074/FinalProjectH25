@@ -3,6 +3,13 @@ package org.example.user;
 import org.example.task.Task;
 
 public class StudentUser extends User {
+    private long studentId;
+
+    public StudentUser(String username, long studentId) {
+        super(username);
+        this.studentId = studentId;
+    }
+
     public void addTask(Task task) {
         //Todo
     }

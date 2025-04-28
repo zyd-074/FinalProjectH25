@@ -39,21 +39,4 @@ public class TaskManager{
     public void loadFromFile(String filePath) {
         //todo
     }
-
-    public static class PriorityComparator implements Comparator<Task>{
-        @Override
-        public int compare(Task o1, Task o2) {
-            return 0;
-            //Todo
-        }
-    }
-
-    public static class DueDateComparator implements Comparator<Task>{
-
-        @Override
-        public int compare(Task o1, Task o2) {
-            return 0;
-            //Todo
-        }
-    }
 }
