@@ -1,42 +1,96 @@
 package org.example;
 
+import org.example.cmd.FileHandler;
 import org.example.task.Task;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class TaskManager{
     private List<Task> tasks;
 
+    public TaskManager() {
+        this.tasks = new ArrayList<>();
+    }
+
     public boolean addTask(Task task) {
-        //Todo
+        if (task == null) {
+            return false;
+        }
+        tasks.add(task);
+        return true;
     }
 
     public boolean removeTask(int idx) {
-        //Todo
+        if (idx < 0 || idx >= tasks.size()) {
+            System.out.println("Invalid index");
+            return false;
+        }
+        tasks.remove(idx);
+        return true;
     }
 
     public boolean markTaskComplete(int idx) {
-        //Todo
+        if (idx < 0 || idx >= tasks.size()) {
+            System.out.println("Invalid index");
+            return false;
+        }
+        tasks.get(idx).markComplete();
+        return true;
     }
 
     public void viewTasks() {
-        //Todo
+        if (tasks.isEmpty()) {
+            System.out.println("No tasks available.");
+            return;
+        }
+        for (Task task : tasks) {
+            System.out.println(task);
+        }
     }
 
-    public void sortTasks(Comparator<Task> comparator) {
-        //Todo
+    public boolean sortTasks(Comparator<Task> comparator) {
+        if (comparator == null) {
+            System.out.println("Invalid comparator");
+            return false;
+        }
+        tasks.sort(comparator);
+        System.out.println("Tasks sorted successfully.");
+        return true;
     }
 
     public List<Task> searchTasks(String keyword) {
-        //Todo
+        if (keyword == null || keyword.isEmpty()) {
+            return new ArrayList<>(this.tasks);
+        }
+
+        List<Task> result = new ArrayList<>();
+        for (Task task : tasks) {
+            if (task.getTitle().toLowerCase().contains(keyword.toLowerCase())) {
+                result.add(task);
+            }
+        }
+        return result;
     }
 
-    public void saveToFile(String filePath) {
-        //Todo
+    public boolean saveToFile(String filePath) {
+        if (filePath == null || filePath.isEmpty()) {
+            System.out.println("Invalid file path");
+            return false;
+        }
+        FileHandler.saveTasks(filePath);
+        System.out.println("Tasks saved to file: " + filePath);
+        return true;
     }
 
-    public void loadFromFile(String filePath) {
-        //todo
+    public boolean loadFromFile(String filePath) {
+        if (filePath == null || filePath.isEmpty()) {
+            System.out.println("Invalid file path");
+            return false;
+        }
+        FileHandler.loadTasks(filePath);
+        System.out.println("Tasks loaded from file: " + filePath);
+        return true;
     }
 }

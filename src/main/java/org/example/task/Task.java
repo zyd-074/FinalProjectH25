@@ -21,4 +21,29 @@ public abstract class Task {
         this.isCompleted = true;
         //Todo: add command to undo Stack
     }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "title='" + title + '\'' +
+                ", createdDate=" + createdDate +
+                ", isCompleted=" + isCompleted +
+                '}';
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
+    }
+
+    public boolean isCompleted() {
+        return isCompleted;
+    }
 }
