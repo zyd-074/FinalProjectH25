@@ -23,12 +23,12 @@ public class UrgentTask extends Task {
         } else if (dueDate.isBefore(now.plusMonths(1))) {
             return Priority.UNDER1MONTH;
         } else {
-            return null; // No priority
+            return Priority.OVER1MONTH;
         }
     }
 
     public static enum Priority {
-        UNDER24H, UNDER7DAYS, UNDER1MONTH
+        UNDER24H, UNDER7DAYS, UNDER1MONTH, OVER1MONTH
     }
 
 
@@ -36,14 +36,13 @@ public class UrgentTask extends Task {
     public static class TaskPriorityComparator implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
-            try {
-                if (o1 instanceof UrgentTask && o2 instanceof UrgentTask) {
-                    return ((UrgentTask) o1).priority.compareTo(((UrgentTask) o2).priority);
-                } else {
-                    throw new ClassCastException();
-                }
-            } catch (ClassCastException e) {
-                System.out.println("Cannot compare tasks of different types.");
+            if (o1 instanceof UrgentTask && o2 instanceof UrgentTask) {
+                return ((UrgentTask) o1).priority.compareTo(((UrgentTask) o2).priority);
+            } else if (o1 instanceof UrgentTask) {
+                return -1;
+            } else if (o2 instanceof UrgentTask) {
+                return 1;
+            } else {
                 return 0;
             }
         }
@@ -52,14 +51,13 @@ public class UrgentTask extends Task {
     public static class TaskDueDateComparator implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
-            try {
-                if (o1 instanceof UrgentTask && o2 instanceof UrgentTask) {
-                    return ((UrgentTask) o1).dueDate.compareTo(((UrgentTask) o2).dueDate);
-                } else {
-                    throw new ClassCastException();
-                }
-            } catch (ClassCastException e) {
-                System.out.println("Cannot compare tasks of different types.");
+            if (o1 instanceof UrgentTask && o2 instanceof UrgentTask) {
+                return ((UrgentTask) o1).dueDate.compareTo(((UrgentTask) o2).dueDate);
+            } else if (o1 instanceof UrgentTask) {
+                return -1;
+            } else if (o2 instanceof UrgentTask) {
+                return 1;
+            } else {
                 return 0;
             }
         }
@@ -67,10 +65,9 @@ public class UrgentTask extends Task {
 
     @Override
     public String toString() {
-        return "UrgentTask{" +
+        return super.toString() +
                 "priority=" + priority +
-                ", dueDate=" + dueDate +
-                "} " + super.toString();
+                ", dueDate=" + dueDate;
     }
 
     @Override
@@ -83,7 +80,7 @@ public class UrgentTask extends Task {
 
     @Override
     public int hashCode() {
-        return Objects.hash(priority, dueDate);
+        return Objects.hash(priority, dueDate, title);
     }
 
     public Priority getPriority() {
