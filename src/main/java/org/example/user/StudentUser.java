@@ -10,11 +10,24 @@ public class StudentUser extends User {
         this.studentId = studentId;
     }
 
-    public void addTask(Task task) {
-        //Todo
+    public boolean addTask(Task task) {
+        if (task != null){
+            this.taskManager.addTask(task);
+            return true;
+        } else {
+            System.out.println("Invalid task");
+            return false;
+        }
     }
-    public void deleteTask(int idx) {
-        //Todo
+    public boolean deleteTask(int idx) {
+        if (idx < 0 || idx > this.taskManager.getTasks().size()) {
+            System.out.println("Invalid index: " + idx);
+            return false;
+        } else {
+            this.taskManager.getTasks().remove(idx);
+            System.out.println("Task successfully removed.");
+            return true;
+        }
     }
     public void markComplete(int idx) {
         //Todo
