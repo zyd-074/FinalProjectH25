@@ -108,31 +108,25 @@ public class TaskManager{
     /**
      * Saves the tasks to a file.
      * @param filePath the path to the file where tasks will be saved
-     * @return true if the tasks were saved successfully, false otherwise
      */
-    public static boolean saveToFile(String filePath) {
+    public void saveToFile(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
             System.out.println("Invalid file path");
-            return false;
         }
-        FileHandler.saveTasks(filePath);
+        FileHandler.saveTasks(tasks);
         System.out.println("Tasks saved to file: " + filePath);
-        return true;
     }
 
     /**
      * Loads tasks from a file.
      * @param filePath the path to the file from which tasks will be loaded
-     * @return true if the tasks were loaded successfully, false otherwise
      */
-    public static boolean loadFromFile(String filePath) {
+    public void loadFromFile(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
             System.out.println("Invalid file path");
-            return false;
         }
         FileHandler.loadTasks(filePath);
         System.out.println("Tasks loaded from file: " + filePath);
-        return true;
     }
 
     public List<Task> getTasks() {

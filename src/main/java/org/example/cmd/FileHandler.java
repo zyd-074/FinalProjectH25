@@ -10,47 +10,46 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Scanner;
 
 public class FileHandler {
-    /**
-     * Saves the tasks to a file.
-     * @param filePath the path to the file
-     */
-    public static void saveTasks(String filePath) {
-//        for (Task task : TaskManager.getTasks()) {
-//            if (task instanceof RegularTask regularTask) {
-//                try (FileWriter fileWriter = new FileWriter(filePath)) {
-//                    fileWriter.write("regular" +
-//                            "," + regularTask.getTitle() +
-//                            "," + regularTask.getCreatedDate() +
-//                            "," + regularTask.isCompleted() +
-//                            "," + regularTask.getTimePassed() + "\n");
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//            if (task instanceof UrgentTask urgentTask) {
-//                try (FileWriter fileWriter = new FileWriter(filePath)) {
-//                    fileWriter.write("urgent" +
-//                            "," + urgentTask.getTitle() +
-//                            "," + urgentTask.getCreatedDate() +
-//                            "," + urgentTask.isCompleted() +
-//                            "," + urgentTask.getDueDate() +
-//                            "," + urgentTask.getPriority() + "\n");
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//            }
-//        }
+
+    public static void saveTasks(List<Task> tasks) {
+        String filePath = "src/main/resources/tasks.csv";
+        for (Task task : tasks) {
+            if (task instanceof RegularTask regularTask) {
+                try (FileWriter fileWriter = new FileWriter(filePath)) {
+                    fileWriter.write("regular" +
+                            "," + regularTask.getTitle() +
+                            "," + regularTask.getCreatedDate() +
+                            "," + regularTask.isCompleted() +
+                            "," + regularTask.getTimePassed() + "\n");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+            if (task instanceof UrgentTask urgentTask) {
+                try (FileWriter fileWriter = new FileWriter(filePath)) {
+                    fileWriter.write("urgent" +
+                            "," + urgentTask.getTitle() +
+                            "," + urgentTask.getCreatedDate() +
+                            "," + urgentTask.isCompleted() +
+                            "," + urgentTask.getDueDate() +
+                            "," + urgentTask.getPriority() + "\n");
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
     }
     /**
      * Loads tasks from a file.
      * @param filePath the path to the file
      */
-    public static void loadTasks(String filePath) {
+    public static List<Task> loadTasks(String filePath) {
         File file = new File(filePath);
-//        taskManager.clearTasks();
+        TaskManager taskManager = new TaskManager();
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -59,13 +58,13 @@ public class FileHandler {
                     Task task = new RegularTask(parts[1]);
                     task.setCreatedDate(LocalDate.parse(parts[2]));
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
-//                    TaskManager.addTask(task);
+                    taskManager.addTask(task);
                 } else if (parts[0].equals("urgent")) {
                     Task task = new UrgentTask(parts[1], (parts[4]));
                     task.setCreatedDate(LocalDate.parse(parts[2]));
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
                     ((UrgentTask) task).setPriority(UrgentTask.Priority.valueOf(parts[5]));
-//                    taskManager.addTask(task);
+                    taskManager.addTask(task);
                 }
             }
         } catch (FileNotFoundException e) {
@@ -73,5 +72,6 @@ public class FileHandler {
         } catch (Exception e) {
             System.out.println("Error loading tasks: " + e.getMessage());
         }
+        return taskManager.getTasks();
     }
 }

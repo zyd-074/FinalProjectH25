@@ -80,7 +80,7 @@ public class StudentUser extends User {
      * @param filePath the path to the file where tasks will be saved
      */
     public void saveTasks(String filePath) {
-        FileHandler.saveTasks(filePath);
+        taskManager.saveToFile(filePath);
     }
 
     /**
@@ -88,7 +88,7 @@ public class StudentUser extends User {
      * @param filePath the path to the file from which tasks will be loaded
      */
     public void loadTasks(String filePath) {
-        FileHandler.loadTasks(filePath);
+        taskManager.loadFromFile(filePath);
         System.out.println("Task successfully loaded");
     }
 

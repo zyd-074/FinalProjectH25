@@ -43,7 +43,7 @@ public class GuestUser extends User {
      * @param filePath the path to the file from which tasks will be loaded
      */
     public void loadTasks(String filePath) {
-        FileHandler.loadTasks(filePath);
+        taskManager.loadFromFile(filePath);
         System.out.println("Task successfully loaded");
     }
 }
