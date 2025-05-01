@@ -20,6 +20,12 @@ public class RegularTask extends Task implements Comparable<Task> {
         }
     }
 
+    @Override
+    public String toString() {
+        return super.toString() +
+                "timePassed=" + timePassed;
+    }
+
     public Duration getTimePassed() {
         return Duration.between(this.createdDate, LocalDate.now());
     }

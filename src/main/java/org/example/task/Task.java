@@ -1,10 +1,6 @@
 package org.example.task;
 
-import org.example.cmd.Command;
-import org.example.cmd.MarkCompleteCommand;
-
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public abstract class Task {
     protected String title;
@@ -24,11 +20,9 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "Task{" +
-                "title='" + title + '\'' +
+        return "title='" + title + '\'' +
                 ", createdDate=" + createdDate +
-                ", isCompleted=" + isCompleted +
-                '}';
+                ", isCompleted=" + isCompleted;
     }
 
     public String getTitle() {
