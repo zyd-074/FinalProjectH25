@@ -2,19 +2,20 @@ package org.example.task;
 
 import java.time.Duration;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 public class RegularTask extends Task implements Comparable<Task> {
-    private final Duration timePassed;
+    private final long timePassed;
 
     public RegularTask(String title) {
         super(title);
-        this.timePassed = Duration.between(this.createdDate, LocalDate.now());
+        this.timePassed = ChronoUnit.DAYS.between(this.createdDate, LocalDate.now());
     }
 
     @Override
     public int compareTo(Task o) throws ClassCastException {
-        if (o instanceof RegularTask) {
-            return this.timePassed.compareTo(((RegularTask) o).timePassed);
+        if (o instanceof RegularTask otherTask) {
+            return Long.compare(this.timePassed, otherTask.timePassed);
         } else {
             throw new ClassCastException();
         }

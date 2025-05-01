@@ -1,6 +1,9 @@
 package org.example.task;
 
+import javax.swing.text.DateFormatter;
+import java.text.DateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -8,10 +11,11 @@ public class UrgentTask extends Task {
     private Priority priority;
     private LocalDate dueDate;
 
-    public UrgentTask(String title, LocalDate dueDate) {
+    public UrgentTask(String title, String Duedate) {
         super(title);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        this.dueDate = LocalDate.parse(Duedate, dateFormat);
         this.priority = determinePriority(dueDate);
-        this.dueDate = dueDate;
     }
 
     /**

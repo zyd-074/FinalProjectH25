@@ -21,7 +21,7 @@ public class StudentUser extends User {
      */
     public boolean addTask(Task task) {
         if (task != null){
-            TaskManager.addTask(task);
+            taskManager.addTask(task);
             return true;
         } else {
             System.out.println("Invalid task");
@@ -35,11 +35,11 @@ public class StudentUser extends User {
      * @return true if the task was deleted successfully, false otherwise
      */
     public boolean deleteTask(int idx) {
-        if (idx < 0 || idx > TaskManager.getTasks().size()) {
+        if (idx < 0 || idx > taskManager.getTasks().size()) {
             System.out.println("Invalid index: " + idx);
             return false;
         } else {
-            TaskManager.getTasks().remove(idx);
+            taskManager.getTasks().remove(idx);
             System.out.println("Task successfully removed.");
             return true;
         }
@@ -50,10 +50,10 @@ public class StudentUser extends User {
      * @param idx the index of the task to be marked as complete
      */
     public void markComplete(int idx) {
-        if (idx < 0 || idx > TaskManager.getTasks().size()) {
+        if (idx < 0 || idx > taskManager.getTasks().size()) {
             System.out.println("Invalid index: " + idx);
         } else {
-            Task task = TaskManager.getTasks().get(idx);
+            Task task = taskManager.getTasks().get(idx);
             task.markComplete();
             System.out.println("Task marked as complete.");
         }
@@ -63,14 +63,16 @@ public class StudentUser extends User {
      * Sorts tasks by deadline or priority.
      */
     public void sortByDeadline() {
-        TaskManager.sortTasks(new UrgentTask.TaskDueDateComparator());
+//        TaskManager.sortTasks(new UrgentTask.TaskDueDateComparator());
+        //todo
     }
 
     /**
      * Sorts tasks by priority.
      */
     public void sortByPriority() {
-        TaskManager.sortTasks(new UrgentTask.TaskPriorityComparator());
+//        TaskManager.sortTasks(new UrgentTask.TaskPriorityComparator());
+        //todo
     }
 
     /**

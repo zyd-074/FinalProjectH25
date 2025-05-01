@@ -17,7 +17,7 @@ public class AddTaskCommand implements Command {
      */
     @Override
     public void undo() {
-        TaskManager.removeTask(task);
+        //todo
     }
 
     /**
@@ -25,7 +25,7 @@ public class AddTaskCommand implements Command {
      */
     @Override
     public void redo() {
-        TaskManager.addTask(task);
+        //todo
     }
 
     public Task getTask() {

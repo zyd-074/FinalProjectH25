@@ -18,31 +18,31 @@ public class FileHandler {
      * @param filePath the path to the file
      */
     public static void saveTasks(String filePath) {
-        for (Task task : TaskManager.getTasks()) {
-            if (task instanceof RegularTask regularTask) {
-                try (FileWriter fileWriter = new FileWriter(filePath)) {
-                    fileWriter.write("regular" +
-                            "," + regularTask.getTitle() +
-                            "," + regularTask.getCreatedDate() +
-                            "," + regularTask.isCompleted() +
-                            "," + regularTask.getTimePassed() + "\n");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-            if (task instanceof UrgentTask urgentTask) {
-                try (FileWriter fileWriter = new FileWriter(filePath)) {
-                    fileWriter.write("urgent" +
-                            "," + urgentTask.getTitle() +
-                            "," + urgentTask.getCreatedDate() +
-                            "," + urgentTask.isCompleted() +
-                            "," + urgentTask.getDueDate() +
-                            "," + urgentTask.getPriority() + "\n");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
+//        for (Task task : TaskManager.getTasks()) {
+//            if (task instanceof RegularTask regularTask) {
+//                try (FileWriter fileWriter = new FileWriter(filePath)) {
+//                    fileWriter.write("regular" +
+//                            "," + regularTask.getTitle() +
+//                            "," + regularTask.getCreatedDate() +
+//                            "," + regularTask.isCompleted() +
+//                            "," + regularTask.getTimePassed() + "\n");
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//            if (task instanceof UrgentTask urgentTask) {
+//                try (FileWriter fileWriter = new FileWriter(filePath)) {
+//                    fileWriter.write("urgent" +
+//                            "," + urgentTask.getTitle() +
+//                            "," + urgentTask.getCreatedDate() +
+//                            "," + urgentTask.isCompleted() +
+//                            "," + urgentTask.getDueDate() +
+//                            "," + urgentTask.getPriority() + "\n");
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            }
+//        }
     }
     /**
      * Loads tasks from a file.
@@ -50,7 +50,7 @@ public class FileHandler {
      */
     public static void loadTasks(String filePath) {
         File file = new File(filePath);
-        TaskManager.clearTasks();
+//        taskManager.clearTasks();
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -59,13 +59,13 @@ public class FileHandler {
                     Task task = new RegularTask(parts[1]);
                     task.setCreatedDate(LocalDate.parse(parts[2]));
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
-                    TaskManager.addTask(task);
+//                    TaskManager.addTask(task);
                 } else if (parts[0].equals("urgent")) {
-                    Task task = new UrgentTask(parts[1], LocalDate.parse(parts[4]));
+                    Task task = new UrgentTask(parts[1], (parts[4]));
                     task.setCreatedDate(LocalDate.parse(parts[2]));
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
                     ((UrgentTask) task).setPriority(UrgentTask.Priority.valueOf(parts[5]));
-                    TaskManager.addTask(task);
+//                    taskManager.addTask(task);
                 }
             }
         } catch (FileNotFoundException e) {

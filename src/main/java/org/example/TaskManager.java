@@ -8,7 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TaskManager{
-    private static List<Task> tasks;
+    private List<Task> tasks;
 
     public TaskManager() {
         tasks = new ArrayList<>();
@@ -18,26 +18,26 @@ public class TaskManager{
      * Adds a task to the task list.
      * @param task the task to be added
      */
-    public static void addTask(Task task) {
+    public void addTask(Task task) {
         if (task == null) {
             return;
         }
-        tasks.add(task);
+        this.tasks.add(task);
     }
 
     /**
      * Clears all tasks from the task list.
      */
-    public static void clearTasks() {
-        tasks.clear();
+    public void clearTasks() {
+        this.tasks.clear();
     }
 
     /**
      * Removes a task from the task list.
      * @param task the task to be removed
      */
-    public static void removeTask(Task task) {
-        if (task == null || !tasks.contains(task)) {
+    public void removeTask(Task task) {
+        if (task == null || !this.tasks.contains(task)) {
             System.out.println("Task not found");
             return;
         }
@@ -50,8 +50,8 @@ public class TaskManager{
      * @param task the task to be marked as complete
      * @return true if the task was marked as complete, false otherwise
      */
-    public static boolean markTaskComplete(Task task) {
-        if (task == null || !tasks.contains(task)) {
+    public boolean markTaskComplete(Task task) {
+        if (task == null || !this.tasks.contains(task)) {
             System.out.println("Task not found");
             return false;
         }
@@ -77,12 +77,12 @@ public class TaskManager{
      * Sorts the tasks in the task list using the provided comparator.
      * @param comparator the comparator to be used for sorting
      */
-    public static void sortTasks(Comparator<Task> comparator) {
+    public void sortTasks(Comparator<Task> comparator) {
         if (comparator == null) {
             System.out.println("Invalid comparator");
             return;
         }
-        tasks.sort(comparator);
+        this.tasks.sort(comparator);
         System.out.println("Tasks sorted successfully.");
     }
 
@@ -91,9 +91,9 @@ public class TaskManager{
      * @param keyword the keyword to search for
      * @return a list of tasks containing the keyword
      */
-    public static List<Task> searchTasks(String keyword) {
+    public List<Task> searchTasks(String keyword) {
         if (keyword == null || keyword.isEmpty()) {
-            return new ArrayList<>(tasks);
+            return new ArrayList<>(this.tasks);
         }
 
         List<Task> result = new ArrayList<>();
@@ -135,11 +135,11 @@ public class TaskManager{
         return true;
     }
 
-    public static List<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 
-    public static void setTasks(List<Task> tasks) {
-        TaskManager.tasks = tasks;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
