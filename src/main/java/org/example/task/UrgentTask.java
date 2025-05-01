@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.Objects;
 
 public class UrgentTask extends Task {
-    private final Priority priority;
+    private Priority priority;
     private LocalDate dueDate;
 
     public UrgentTask(String title, LocalDate dueDate) {
@@ -93,5 +93,9 @@ public class UrgentTask extends Task {
 
     public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
     }
 }
