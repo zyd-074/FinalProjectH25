@@ -14,6 +14,10 @@ public class TaskManager{
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Adds a task to the task list.
+     * @param task the task to be added
+     */
     public static void addTask(Task task) {
         if (task == null) {
             return;
@@ -21,10 +25,17 @@ public class TaskManager{
         tasks.add(task);
     }
 
+    /**
+     * Clears all tasks from the task list.
+     */
     public static void clearTasks() {
         tasks.clear();
     }
 
+    /**
+     * Removes a task from the task list.
+     * @param task the task to be removed
+     */
     public static void removeTask(Task task) {
         if (task == null || !tasks.contains(task)) {
             System.out.println("Task not found");
@@ -34,6 +45,11 @@ public class TaskManager{
         System.out.println("Task removed successfully.");
     }
 
+    /**
+     * Marks a task as complete.
+     * @param task the task to be marked as complete
+     * @return true if the task was marked as complete, false otherwise
+     */
     public static boolean markTaskComplete(Task task) {
         if (task == null || !tasks.contains(task)) {
             System.out.println("Task not found");
@@ -44,6 +60,9 @@ public class TaskManager{
         return true;
     }
 
+    /**
+     * Displays all tasks in the task list.
+     */
     public void viewTasks() {
         if (tasks.isEmpty()) {
             System.out.println("No tasks available.");
@@ -54,6 +73,10 @@ public class TaskManager{
         }
     }
 
+    /**
+     * Sorts the tasks in the task list using the provided comparator.
+     * @param comparator the comparator to be used for sorting
+     */
     public static void sortTasks(Comparator<Task> comparator) {
         if (comparator == null) {
             System.out.println("Invalid comparator");
@@ -63,6 +86,11 @@ public class TaskManager{
         System.out.println("Tasks sorted successfully.");
     }
 
+    /**
+     * Searches for tasks containing the specified keyword in their title.
+     * @param keyword the keyword to search for
+     * @return a list of tasks containing the keyword
+     */
     public static List<Task> searchTasks(String keyword) {
         if (keyword == null || keyword.isEmpty()) {
             return new ArrayList<>(tasks);
@@ -77,6 +105,11 @@ public class TaskManager{
         return result;
     }
 
+    /**
+     * Saves the tasks to a file.
+     * @param filePath the path to the file where tasks will be saved
+     * @return true if the tasks were saved successfully, false otherwise
+     */
     public static boolean saveToFile(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
             System.out.println("Invalid file path");
@@ -87,6 +120,11 @@ public class TaskManager{
         return true;
     }
 
+    /**
+     * Loads tasks from a file.
+     * @param filePath the path to the file from which tasks will be loaded
+     * @return true if the tasks were loaded successfully, false otherwise
+     */
     public static boolean loadFromFile(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
             System.out.println("Invalid file path");

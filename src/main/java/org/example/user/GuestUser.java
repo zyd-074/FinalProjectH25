@@ -14,21 +14,36 @@ public class GuestUser extends User {
         this.guestId = nextID++;
     }
 
+    /**
+     * Sorts the tasks by their deadline.
+     * @param tasks the list of tasks to be sorted
+     */
     public void sortByDeadline(List<Task> tasks) {
         tasks.sort(new UrgentTask.TaskDueDateComparator());
     }
+
+    /**
+     * Sorts the tasks by their priority.
+     * @param tasks the list of tasks to be sorted
+     */
     public void sortByPriority(List<Task> tasks) {
         tasks.sort(new UrgentTask.TaskPriorityComparator());
     }
 
+    /**
+     * Displays all tasks in the task manager.
+     */
     @Override
     public void displayAllTasks() {
         this.taskManager.viewTasks();
     }
 
-    public boolean loadTasks(String filePath) {
+    /**
+     * Loads tasks to a file.
+     * @param filePath the path to the file from which tasks will be loaded
+     */
+    public void loadTasks(String filePath) {
         FileHandler.loadTasks(filePath);
         System.out.println("Task successfully loaded");
-        return true;
     }
 }

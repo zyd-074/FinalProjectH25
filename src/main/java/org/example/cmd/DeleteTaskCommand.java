@@ -12,11 +12,17 @@ public class DeleteTaskCommand implements Command {
         this.manager = manager;
     }
 
+    /**
+     * Adds the task to the TaskManager.
+     */
     @Override
     public void undo() {
         TaskManager.addTask(task);
     }
 
+    /**
+     * Removes the task to the TaskManager.
+     */
     @Override
     public void redo() {
         TaskManager.removeTask(task);

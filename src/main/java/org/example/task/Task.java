@@ -13,9 +13,12 @@ public abstract class Task {
         this.isCompleted = false;
     }
 
+    /**
+     * Marks the task as completed.
+     */
     public void markComplete() {
         this.isCompleted = true;
-        //Todo: add command to undo Stack
+        //Todo: add command to undo Stack?
     }
 
     @Override

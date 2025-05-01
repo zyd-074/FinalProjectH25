@@ -19,6 +19,9 @@ public abstract class User{
 
     public abstract void displayAllTasks();
 
+    /**
+     * Adds a command to the undo stack and push the redo stack.
+     */
     public void undo() {
         if (!undoStack.isEmpty()) {
             Command command = undoStack.pop();
@@ -29,6 +32,9 @@ public abstract class User{
         }
     }
 
+    /**
+     * Adds a command to the redo stack and push the undo stack.
+     */
     public void redo() {
         if (!redoStack.isEmpty()) {
             Command command = redoStack.pop();

@@ -14,6 +14,11 @@ public class UrgentTask extends Task {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Determines the priority of the task based on its due date.
+     * @param dueDate the due date of the task
+     * @return the priority of the task
+     */
     private Priority determinePriority(LocalDate dueDate) {
         LocalDate now = LocalDate.now();
         if (dueDate.isBefore(now.plusDays(1))) {
@@ -33,6 +38,9 @@ public class UrgentTask extends Task {
 
 
 
+    /**
+     * Compares two tasks based on their priority.
+     */
     public static class TaskPriorityComparator implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {
@@ -48,6 +56,9 @@ public class UrgentTask extends Task {
         }
     }
 
+    /**
+     * Compares two tasks based on their due date.
+     */
     public static class TaskDueDateComparator implements Comparator<Task> {
         @Override
         public int compare(Task o1, Task o2) {

@@ -13,6 +13,10 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class FileHandler {
+    /**
+     * Saves the tasks to a file.
+     * @param filePath the path to the file
+     */
     public static void saveTasks(String filePath) {
         for (Task task : TaskManager.getTasks()) {
             if (task instanceof RegularTask regularTask) {
@@ -40,6 +44,10 @@ public class FileHandler {
             }
         }
     }
+    /**
+     * Loads tasks from a file.
+     * @param filePath the path to the file
+     */
     public static void loadTasks(String filePath) {
         File file = new File(filePath);
         TaskManager.clearTasks();

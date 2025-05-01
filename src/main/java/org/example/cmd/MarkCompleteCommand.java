@@ -8,14 +8,19 @@ public class MarkCompleteCommand implements Command {
     public MarkCompleteCommand(Task task) {
         this.task = task;
         task.markComplete();
-
     }
 
+    /**
+     * Marks the task as not completed.
+     */
     @Override
     public void undo() {
         task.setCompleted(false);
     }
 
+    /**
+     * Marks the task as completed.
+     */
     @Override
     public void redo() {
         task.markComplete();

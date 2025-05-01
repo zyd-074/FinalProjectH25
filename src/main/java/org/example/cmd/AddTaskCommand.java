@@ -12,11 +12,17 @@ public class AddTaskCommand implements Command {
         this.manager = manager;
     }
 
+    /**
+     * Removes the task to the TaskManager.
+     */
     @Override
     public void undo() {
         TaskManager.removeTask(task);
     }
 
+    /**
+     * Adds the task to the TaskManager.
+     */
     @Override
     public void redo() {
         TaskManager.addTask(task);
