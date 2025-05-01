@@ -14,11 +14,27 @@ public class DeleteTaskCommand implements Command {
 
     @Override
     public void undo() {
-
+        TaskManager.addTask(task);
     }
 
     @Override
     public void redo() {
+        TaskManager.removeTask(task);
+    }
 
+    public Task getTask() {
+        return task;
+    }
+
+    public void setTask(Task task) {
+        this.task = task;
+    }
+
+    public TaskManager getManager() {
+        return manager;
+    }
+
+    public void setManager(TaskManager manager) {
+        this.manager = manager;
     }
 }

@@ -21,21 +21,22 @@ public class TaskManager{
         tasks.clear();
     }
 
-    public boolean removeTask(int idx) {
-        if (idx < 0 || idx >= tasks.size()) {
-            System.out.println("Invalid index");
-            return false;
+    public static void removeTask(Task task) {
+        if (task == null || !tasks.contains(task)) {
+            System.out.println("Task not found");
+            return;
         }
-        tasks.remove(idx);
-        return true;
+        tasks.remove(task);
+        System.out.println("Task removed successfully.");
     }
 
-    public boolean markTaskComplete(int idx) {
-        if (idx < 0 || idx >= tasks.size()) {
-            System.out.println("Invalid index");
+    public static boolean markTaskComplete(Task task) {
+        if (task == null || !tasks.contains(task)) {
+            System.out.println("Task not found");
             return false;
         }
-        tasks.get(idx).markComplete();
+        task.markComplete();
+        System.out.println("Task marked as complete.");
         return true;
     }
 
@@ -49,7 +50,7 @@ public class TaskManager{
         }
     }
 
-    public boolean sortTasks(Comparator<Task> comparator) {
+    public static boolean sortTasks(Comparator<Task> comparator) {
         if (comparator == null) {
             System.out.println("Invalid comparator");
             return false;
@@ -59,7 +60,7 @@ public class TaskManager{
         return true;
     }
 
-    public List<Task> searchTasks(String keyword) {
+    public static List<Task> searchTasks(String keyword) {
         if (keyword == null || keyword.isEmpty()) {
             return new ArrayList<>(tasks);
         }
@@ -73,7 +74,7 @@ public class TaskManager{
         return result;
     }
 
-    public boolean saveToFile(String filePath) {
+    public static boolean saveToFile(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
             System.out.println("Invalid file path");
             return false;
@@ -83,7 +84,7 @@ public class TaskManager{
         return true;
     }
 
-    public boolean loadFromFile(String filePath) {
+    public static boolean loadFromFile(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
             System.out.println("Invalid file path");
             return false;

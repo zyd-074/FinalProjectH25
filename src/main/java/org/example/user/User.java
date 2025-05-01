@@ -20,10 +20,22 @@ public abstract class User{
     public abstract void displayAllTasks();
 
     public void undo() {
-        //Todo
+        if (!undoStack.isEmpty()) {
+            Command command = undoStack.pop();
+            command.undo();
+            redoStack.push(command);
+        } else {
+            System.out.println("No commands to undo.");
+        }
     }
 
     public void redo() {
-        //Todo
+        if (!redoStack.isEmpty()) {
+            Command command = redoStack.pop();
+            command.redo();
+            undoStack.push(command);
+        } else {
+            System.out.println("No commands to redo.");
+        }
     }
 }
