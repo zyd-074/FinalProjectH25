@@ -1,7 +1,9 @@
 package org.example.user;
 
 import org.example.TaskManager;
+import org.example.cmd.FileHandler;
 import org.example.task.Task;
+import org.example.task.UrgentTask;
 
 public class StudentUser extends User {
     private long studentId;
@@ -32,24 +34,31 @@ public class StudentUser extends User {
         }
     }
     public void markComplete(int idx) {
-        //Todo
+        if (idx < 0 || idx > TaskManager.getTasks().size()) {
+            System.out.println("Invalid index: " + idx);
+        } else {
+            Task task = TaskManager.getTasks().get(idx);
+            task.markComplete();
+            System.out.println("Task marked as complete.");
+        }
     }
     public void sortByDeadline() {
-        //Todo
+        TaskManager.sortTasks(new UrgentTask.TaskDueDateComparator());
     }
     public void sortByPriority() {
-        //Todo
+        TaskManager.sortTasks(new UrgentTask.TaskPriorityComparator());
     }
     public void saveTasks(String filePath) {
-        //Todo
+        FileHandler.saveTasks(filePath);
     }
     public void loadTasks(String filePath) {
-        //Todo
+        FileHandler.loadTasks(filePath);
+        System.out.println("Task successfully loaded");
     }
 
     @Override
     public void displayAllTasks() {
-
+        this.taskManager.viewTasks();
     }
 
     public long getStudentId() {

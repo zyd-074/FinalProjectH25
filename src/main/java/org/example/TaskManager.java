@@ -8,7 +8,11 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TaskManager{
-    private static List<Task> tasks = new ArrayList<>();
+    private static List<Task> tasks;
+
+    public TaskManager() {
+        tasks = new ArrayList<>();
+    }
 
     public static void addTask(Task task) {
         if (task == null) {
@@ -50,14 +54,13 @@ public class TaskManager{
         }
     }
 
-    public static boolean sortTasks(Comparator<Task> comparator) {
+    public static void sortTasks(Comparator<Task> comparator) {
         if (comparator == null) {
             System.out.println("Invalid comparator");
-            return false;
+            return;
         }
         tasks.sort(comparator);
         System.out.println("Tasks sorted successfully.");
-        return true;
     }
 
     public static List<Task> searchTasks(String keyword) {

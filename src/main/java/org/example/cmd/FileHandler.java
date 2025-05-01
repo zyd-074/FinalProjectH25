@@ -13,12 +13,10 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class FileHandler {
-    static File file = new File("src/main/resources/tasks.csv");
-
     public static void saveTasks(String filePath) {
         for (Task task : TaskManager.getTasks()) {
             if (task instanceof RegularTask regularTask) {
-                try (FileWriter fileWriter = new FileWriter(file)) {
+                try (FileWriter fileWriter = new FileWriter(filePath)) {
                     fileWriter.write("regular" +
                             "," + regularTask.getTitle() +
                             "," + regularTask.getCreatedDate() +
@@ -29,7 +27,7 @@ public class FileHandler {
                 }
             }
             if (task instanceof UrgentTask urgentTask) {
-                try (FileWriter fileWriter = new FileWriter(file)) {
+                try (FileWriter fileWriter = new FileWriter(filePath)) {
                     fileWriter.write("urgent" +
                             "," + urgentTask.getTitle() +
                             "," + urgentTask.getCreatedDate() +
@@ -43,6 +41,7 @@ public class FileHandler {
         }
     }
     public static void loadTasks(String filePath) {
+        File file = new File(filePath);
         TaskManager.clearTasks();
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNextLine()) {
@@ -62,7 +61,9 @@ public class FileHandler {
                 }
             }
         } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
+            System.out.println("File not found: " + filePath);
+        } catch (Exception e) {
+            System.out.println("Error loading tasks: " + e.getMessage());
         }
     }
 }
