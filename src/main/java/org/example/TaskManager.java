@@ -8,11 +8,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TaskManager{
-    private final List<Task> tasks;
-
-    public TaskManager() {
-        this.tasks = new ArrayList<>();
-    }
+    private static List<Task> tasks = new ArrayList<>();
 
     public void addTask(Task task) {
         if (task == null) {
@@ -61,7 +57,7 @@ public class TaskManager{
 
     public List<Task> searchTasks(String keyword) {
         if (keyword == null || keyword.isEmpty()) {
-            return new ArrayList<>(this.tasks);
+            return new ArrayList<>(tasks);
         }
 
         List<Task> result = new ArrayList<>();
@@ -93,7 +89,7 @@ public class TaskManager{
         return true;
     }
 
-    public List<Task> getTasks() {
+    public static List<Task> getTasks() {
         return tasks;
     }
 }
