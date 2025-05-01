@@ -40,4 +40,12 @@ public abstract class Task {
     public boolean isCompleted() {
         return isCompleted;
     }
+
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public void setCompleted(boolean completed) {
+        isCompleted = completed;
+    }
 }

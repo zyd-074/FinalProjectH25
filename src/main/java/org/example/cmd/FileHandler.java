@@ -6,8 +6,11 @@ import org.example.TaskManager;
 import org.example.task.UrgentTask;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Scanner;
 
 public class FileHandler {
     static File file = new File("src/main/resources/tasks.csv");
@@ -40,6 +43,26 @@ public class FileHandler {
         }
     }
     public static void loadTasks(String filePath) {
-        //Todo
+        TaskManager.clearTasks();
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] parts = line.split(",");
+                if (parts[0].equals("regular")) {
+                    Task task = new RegularTask(parts[1]);
+                    task.setCreatedDate(LocalDate.parse(parts[2]));
+                    task.setCompleted(Boolean.parseBoolean(parts[3]));
+                    TaskManager.addTask(task);
+                } else if (parts[0].equals("urgent")) {
+                    Task task = new UrgentTask(parts[1], LocalDate.parse(parts[4]));
+                    task.setCreatedDate(LocalDate.parse(parts[2]));
+                    task.setCompleted(Boolean.parseBoolean(parts[3]));
+                    ((UrgentTask) task).setPriority(UrgentTask.Priority.valueOf(parts[5]));
+                    TaskManager.addTask(task);
+                }
+            }
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

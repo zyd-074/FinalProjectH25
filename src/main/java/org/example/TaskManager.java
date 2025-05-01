@@ -10,11 +10,15 @@ import java.util.List;
 public class TaskManager{
     private static List<Task> tasks = new ArrayList<>();
 
-    public void addTask(Task task) {
+    public static void addTask(Task task) {
         if (task == null) {
             return;
         }
         tasks.add(task);
+    }
+
+    public static void clearTasks() {
+        tasks.clear();
     }
 
     public boolean removeTask(int idx) {
