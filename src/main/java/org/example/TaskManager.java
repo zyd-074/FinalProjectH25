@@ -47,30 +47,31 @@ public class TaskManager{
 
     /**
      * Marks a task as complete.
+     *
      * @param task the task to be marked as complete
-     * @return true if the task was marked as complete, false otherwise
      */
-    public boolean markTaskComplete(Task task) {
+    public void markTaskComplete(Task task) {
         if (task == null || !this.tasks.contains(task)) {
             System.out.println("Task not found");
-            return false;
+            return;
         }
         task.markComplete();
         System.out.println("Task marked as complete.");
-        return true;
     }
 
     /**
      * Displays all tasks in the task list.
      */
-    public void viewTasks() {
+    public String viewTasks() {
+        String result = "";
         if (tasks.isEmpty()) {
             System.out.println("No tasks available.");
-            return;
+            return "";
         }
         for (Task task : tasks) {
-            System.out.println(task + "\n");
+            result += (task + "\n");
         }
+        return result;
     }
 
     /**
@@ -125,7 +126,7 @@ public class TaskManager{
         if (filePath == null || filePath.isEmpty()) {
             System.out.println("Invalid file path");
         }
-        FileHandler.loadTasks(filePath);
+        this.tasks = FileHandler.loadTasks(filePath);
         System.out.println("Tasks loaded from file: " + filePath);
     }
 

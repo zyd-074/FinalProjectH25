@@ -11,10 +11,9 @@ public class UrgentTask extends Task {
     private Priority priority;
     private LocalDate dueDate;
 
-    public UrgentTask(String title, String Duedate) {
+    public UrgentTask(String title, LocalDate dueDate) {
         super(title);
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        this.dueDate = LocalDate.parse(Duedate, dateFormat);
+        this.dueDate = dueDate;
         this.priority = determinePriority(dueDate);
     }
 
@@ -80,7 +79,7 @@ public class UrgentTask extends Task {
 
     @Override
     public String toString() {
-        return super.toString() +
+        return super.toString() + ", " +
                 "priority=" + priority +
                 ", dueDate=" + dueDate;
     }

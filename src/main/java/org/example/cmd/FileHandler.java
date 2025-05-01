@@ -5,6 +5,7 @@ import org.example.task.Task;
 import org.example.TaskManager;
 import org.example.task.UrgentTask;
 
+import javax.swing.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,11 +16,24 @@ import java.util.Scanner;
 
 public class FileHandler {
 
+    /**
+     * Saves tasks to a file.
+     * @param tasks the list of tasks to be saved
+     */
     public static void saveTasks(List<Task> tasks) {
         String filePath = "src/main/resources/tasks.csv";
+
+        //Reinitialize the file
+        try (FileWriter fileWriter = new FileWriter(filePath)) {
+            fileWriter.write("");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Write
         for (Task task : tasks) {
             if (task instanceof RegularTask regularTask) {
-                try (FileWriter fileWriter = new FileWriter(filePath)) {
+                try (FileWriter fileWriter = new FileWriter(filePath, true)) {
                     fileWriter.write("regular" +
                             "," + regularTask.getTitle() +
                             "," + regularTask.getCreatedDate() +
@@ -28,9 +42,8 @@ public class FileHandler {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-            }
-            if (task instanceof UrgentTask urgentTask) {
-                try (FileWriter fileWriter = new FileWriter(filePath)) {
+            } else if (task instanceof UrgentTask urgentTask) {
+                try (FileWriter fileWriter = new FileWriter(filePath, true)) {
                     fileWriter.write("urgent" +
                             "," + urgentTask.getTitle() +
                             "," + urgentTask.getCreatedDate() +
@@ -43,6 +56,7 @@ public class FileHandler {
             }
         }
     }
+
     /**
      * Loads tasks from a file.
      * @param filePath the path to the file
@@ -60,7 +74,7 @@ public class FileHandler {
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
                     taskManager.addTask(task);
                 } else if (parts[0].equals("urgent")) {
-                    Task task = new UrgentTask(parts[1], (parts[4]));
+                    Task task = new UrgentTask(parts[1], LocalDate.parse(parts[4]));
                     task.setCreatedDate(LocalDate.parse(parts[2]));
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
                     ((UrgentTask) task).setPriority(UrgentTask.Priority.valueOf(parts[5]));

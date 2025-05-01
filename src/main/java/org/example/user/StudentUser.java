@@ -63,16 +63,14 @@ public class StudentUser extends User {
      * Sorts tasks by deadline or priority.
      */
     public void sortByDeadline() {
-//        TaskManager.sortTasks(new UrgentTask.TaskDueDateComparator());
-        //todo
+        taskManager.sortTasks(new UrgentTask.TaskDueDateComparator());
     }
 
     /**
      * Sorts tasks by priority.
      */
     public void sortByPriority() {
-//        TaskManager.sortTasks(new UrgentTask.TaskPriorityComparator());
-        //todo
+        taskManager.sortTasks(new UrgentTask.TaskPriorityComparator());
     }
 
     /**

@@ -16,18 +16,16 @@ public class GuestUser extends User {
 
     /**
      * Sorts the tasks by their deadline.
-     * @param tasks the list of tasks to be sorted
      */
-    public void sortByDeadline(List<Task> tasks) {
-        tasks.sort(new UrgentTask.TaskDueDateComparator());
+    public void sortByDeadline() {
+        this.taskManager.getTasks().sort(new UrgentTask.TaskDueDateComparator());
     }
 
     /**
      * Sorts the tasks by their priority.
-     * @param tasks the list of tasks to be sorted
      */
-    public void sortByPriority(List<Task> tasks) {
-        tasks.sort(new UrgentTask.TaskPriorityComparator());
+    public void sortByPriority() {
+        this.taskManager.getTasks().sort(new UrgentTask.TaskPriorityComparator());
     }
 
     /**
