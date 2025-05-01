@@ -8,18 +8,17 @@ import java.util.Comparator;
 import java.util.List;
 
 public class TaskManager{
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     public TaskManager() {
         this.tasks = new ArrayList<>();
     }
 
-    public boolean addTask(Task task) {
+    public void addTask(Task task) {
         if (task == null) {
-            return false;
+            return;
         }
         tasks.add(task);
-        return true;
     }
 
     public boolean removeTask(int idx) {
@@ -46,7 +45,7 @@ public class TaskManager{
             return;
         }
         for (Task task : tasks) {
-            System.out.println(task);
+            System.out.println(task + "\n");
         }
     }
 
@@ -92,5 +91,9 @@ public class TaskManager{
         FileHandler.loadTasks(filePath);
         System.out.println("Tasks loaded from file: " + filePath);
         return true;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
     }
 }
