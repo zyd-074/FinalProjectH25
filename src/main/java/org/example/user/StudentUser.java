@@ -1,5 +1,6 @@
 package org.example.user;
 
+import org.example.TaskManager;
 import org.example.task.Task;
 
 public class StudentUser extends User {
@@ -13,7 +14,7 @@ public class StudentUser extends User {
 
     public boolean addTask(Task task) {
         if (task != null){
-            this.taskManager.addTask(task);
+            TaskManager.addTask(task);
             return true;
         } else {
             System.out.println("Invalid task");
@@ -21,11 +22,11 @@ public class StudentUser extends User {
         }
     }
     public boolean deleteTask(int idx) {
-        if (idx < 0 || idx > this.taskManager.getTasks().size()) {
+        if (idx < 0 || idx > TaskManager.getTasks().size()) {
             System.out.println("Invalid index: " + idx);
             return false;
         } else {
-            this.taskManager.getTasks().remove(idx);
+            TaskManager.getTasks().remove(idx);
             System.out.println("Task successfully removed.");
             return true;
         }
@@ -49,5 +50,13 @@ public class StudentUser extends User {
     @Override
     public void displayAllTasks() {
 
+    }
+
+    public long getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(long studentId) {
+        this.studentId = studentId;
     }
 }
