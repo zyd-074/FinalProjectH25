@@ -96,4 +96,8 @@ public class TaskManager{
     public static List<Task> getTasks() {
         return tasks;
     }
+
+    public static void setTasks(List<Task> tasks) {
+        TaskManager.tasks = tasks;
+    }
 }

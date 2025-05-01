@@ -1,11 +1,7 @@
 package org.example.cmd;
 
 public interface Command {
-    static void undo() {
+    void undo();
 
-    }
-
-    static void redo() {
-
-    }
+    void redo();
 }
