@@ -4,10 +4,11 @@ import org.example.task.Task;
 
 public class StudentUser extends User {
     private long studentId;
+    private static long nextID = 20000;
 
     public StudentUser(String username, long studentId) {
         super(username);
-        this.studentId = studentId;
+        this.studentId = nextID++;
     }
 
     public boolean addTask(Task task) {
