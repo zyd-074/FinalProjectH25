@@ -1,47 +1,43 @@
 package org.example.user;
 
-import org.example.TaskManager;
-import org.example.cmd.FileHandler;
 import org.example.task.Task;
 import org.example.task.UrgentTask;
+
+import java.util.Objects;
 
 public class StudentUser extends User {
     private long studentId;
     private static long nextID = 20000;
 
-    public StudentUser(String username, long studentId) {
+    public StudentUser(String username) {
         super(username);
         this.studentId = nextID++;
     }
 
     /**
      * Adds a task to the task manager.
+     *
      * @param task the task to be added
-     * @return true if the task was added successfully, false otherwise
      */
-    public boolean addTask(Task task) {
+    public void addTask(Task task) {
         if (task != null){
             taskManager.addTask(task);
-            return true;
         } else {
             System.out.println("Invalid task");
-            return false;
         }
     }
 
     /**
      * Deletes a task from the task manager.
+     *
      * @param idx the index of the task to be deleted
-     * @return true if the task was deleted successfully, false otherwise
      */
-    public boolean deleteTask(int idx) {
+    public void deleteTask(int idx) {
         if (idx < 0 || idx > taskManager.getTasks().size()) {
             System.out.println("Invalid index: " + idx);
-            return false;
         } else {
             taskManager.getTasks().remove(idx);
             System.out.println("Task successfully removed.");
-            return true;
         }
     }
 
@@ -80,9 +76,21 @@ public class StudentUser extends User {
     public void saveTasks(String filePath) {
         taskManager.saveToFile(filePath);
     }
+    /**
+     * Saves tasks to a file.
+     */
+    public void saveTasks() {
+        this.saveTasks("src/main/resources/tasks.csv");
+    }
 
     /**
      * Loads tasks from a file.
+     */
+    public void loadTasks() {
+        this.loadTasks("src/main/resources/tasks.csv");
+    }
+    /**
+     * Loads tasks from a specified file path.
      * @param filePath the path to the file from which tasks will be loaded
      */
     public void loadTasks(String filePath) {
@@ -105,4 +113,26 @@ public class StudentUser extends User {
     public void setStudentId(long studentId) {
         this.studentId = studentId;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        StudentUser that = (StudentUser) o;
+        return studentId == that.studentId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), studentId);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "studentId=" + studentId;
+    }
+
+
 }

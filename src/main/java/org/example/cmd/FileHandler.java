@@ -15,14 +15,21 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileHandler {
+    static String filePath = "src/main/resources/tasks.csv";
 
     /**
-     * Saves tasks to a file.
+     * Saves tasks to a file to the default path.
      * @param tasks the list of tasks to be saved
      */
     public static void saveTasks(List<Task> tasks) {
-        String filePath = "src/main/resources/tasks.csv";
-
+        saveTasks(tasks, filePath);
+    }
+    /**
+     * Saves tasks to a file to a specific path.
+     * @param tasks the list of tasks to be saved
+     * @param filePath the path to the file where tasks will be saved
+     */
+    public static void saveTasks(List<Task> tasks, String filePath) {
         //Reinitialize the file
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             fileWriter.write("");
@@ -58,8 +65,14 @@ public class FileHandler {
     }
 
     /**
-     * Loads tasks from a file.
-     * @param filePath the path to the file
+     * Loads tasks from default path.
+     */
+    public static List<Task> loadTasks() {
+        return loadTasks(filePath);
+    }
+
+    /**
+     * Loads tasks from specific path.
      */
     public static List<Task> loadTasks(String filePath) {
         File file = new File(filePath);

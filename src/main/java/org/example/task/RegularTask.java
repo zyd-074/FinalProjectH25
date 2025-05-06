@@ -3,9 +3,10 @@ package org.example.task;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 public class RegularTask extends Task implements Comparable<Task> {
-    private final long timePassed;
+    private long timePassed;
 
     public RegularTask(String title) {
         super(title);
@@ -29,5 +30,23 @@ public class RegularTask extends Task implements Comparable<Task> {
 
     public long getTimePassed() {
         return timePassed;
+    }
+
+    public void updateTimePassed() {
+        this.timePassed = ChronoUnit.DAYS.between(this.createdDate, LocalDate.now());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        RegularTask that = (RegularTask) o;
+        return timePassed == that.timePassed;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), timePassed);
     }
 }

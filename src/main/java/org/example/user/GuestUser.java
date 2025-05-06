@@ -5,11 +5,12 @@ import org.example.task.Task;
 import org.example.task.UrgentTask;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GuestUser extends User {
     private final long guestId;
     private static long nextID = 10001;
-    public GuestUser(String username, long guestId) {
+    public GuestUser(String username) {
         super(username);
         this.guestId = nextID++;
     }
@@ -43,5 +44,25 @@ public class GuestUser extends User {
     public void loadTasks(String filePath) {
         taskManager.loadFromFile(filePath);
         System.out.println("Task successfully loaded");
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        GuestUser guestUser = (GuestUser) o;
+        return guestId == guestUser.guestId;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), guestId);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                "guestId=" + guestId;
     }
 }

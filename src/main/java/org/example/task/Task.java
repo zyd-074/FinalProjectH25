@@ -1,6 +1,7 @@
 package org.example.task;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 public abstract class Task {
     protected String title;
@@ -50,5 +51,18 @@ public abstract class Task {
 
     public void setCompleted(boolean completed) {
         isCompleted = completed;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return isCompleted == task.isCompleted && Objects.equals(title, task.title) && Objects.equals(createdDate, task.createdDate);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(title, createdDate, isCompleted);
     }
 }
