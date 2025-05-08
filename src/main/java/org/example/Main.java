@@ -157,7 +157,9 @@ public class Main {
                 System.out.print("Enter task due date (yyyy-mm-dd): ");
                 String dueDate = scanner.nextLine();
                 LocalDate date = LocalDate.parse(dueDate);
-                Task task = new UrgentTask(taskName, date);
+                System.out.println("Enter the priority level (LOW, MEDIUM or HIGH)");
+                UrgentTask.Priority priority = UrgentTask.Priority.valueOf(scanner.nextLine().toUpperCase());
+                Task task = new UrgentTask(taskName, date, priority);
                 studentUser.addTask(task);
                 System.out.println("Task added successfully.");
             }

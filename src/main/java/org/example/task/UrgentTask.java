@@ -11,32 +11,14 @@ public class UrgentTask extends Task {
     private Priority priority;
     private LocalDate dueDate;
 
-    public UrgentTask(String title, LocalDate dueDate) {
+    public UrgentTask(String title, LocalDate dueDate, Priority priority) {
         super(title);
         this.dueDate = dueDate;
-        this.priority = determinePriority(dueDate);
-    }
-
-    /**
-     * Determines the priority of the task based on its due date.
-     * @param dueDate the due date of the task
-     * @return the priority of the task
-     */
-    private Priority determinePriority(LocalDate dueDate) {
-        LocalDate now = LocalDate.now();
-        if (dueDate.isBefore(now.plusDays(1))) {
-            return Priority.UNDER24H;
-        } else if (dueDate.isBefore(now.plusDays(7))) {
-            return Priority.UNDER7DAYS;
-        } else if (dueDate.isBefore(now.plusMonths(1))) {
-            return Priority.UNDER1MONTH;
-        } else {
-            return Priority.OVER1MONTH;
-        }
+        this.priority = priority;
     }
 
     public static enum Priority {
-        UNDER24H, UNDER7DAYS, UNDER1MONTH, OVER1MONTH
+        HIGH, MEDIUM, LOW
     }
 
 
@@ -98,7 +80,7 @@ public class UrgentTask extends Task {
     }
 
     public Priority getPriority() {
-        return determinePriority(this.dueDate);
+        return priority;
     }
 
     public LocalDate getDueDate() {

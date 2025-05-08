@@ -87,10 +87,9 @@ public class FileHandler {
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
                     taskManager.addTask(task);
                 } else if (parts[0].equals("urgent")) {
-                    Task task = new UrgentTask(parts[1], LocalDate.parse(parts[4]));
+                    Task task = new UrgentTask(parts[1], LocalDate.parse(parts[4]), UrgentTask.Priority.valueOf(parts[5]));
                     task.setCreatedDate(LocalDate.parse(parts[2]));
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
-                    ((UrgentTask) task).setPriority(UrgentTask.Priority.valueOf(parts[5]));
                     taskManager.addTask(task);
                 }
             }
