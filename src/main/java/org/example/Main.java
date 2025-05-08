@@ -11,8 +11,9 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
+    private static boolean isRunning = true;
+    static User user;
     public static void main(String[] args) {
-        User user;
         System.out.println("Select your identity: \n1. Student\n2. Guest");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
@@ -37,120 +38,88 @@ public class Main {
                 return;
             }
         }
-        System.out.println("Select your action: ");
-        if (user instanceof StudentUser studentUser) {
-            displayStudentMenu();
-            int action = scanner.nextInt();
-            scanner.nextLine();
-            switch (action) {
-                case 1 -> {
-                    System.out.println("Is is urgent? (yes/no)");
-                    String isUrgent = scanner.nextLine();
-                    switch (isUrgent) {
-                        case "yes" -> {
-                            System.out.print("Enter task name: ");
-                            String taskName = scanner.nextLine();
-                            System.out.print("Enter task due date (yyyy-mm-dd): ");
-                            String dueDate = scanner.nextLine();
-                            LocalDate date = LocalDate.parse(dueDate);
-                            Task task = new UrgentTask(taskName, date);
-                            studentUser.addTask(task);
-                            System.out.println("Task added successfully.");
-                        }
-                        case "no" -> {
-                            System.out.print("Enter task name: ");
-                            String taskName = scanner.nextLine();
-                            Task task = new RegularTask(taskName);
-                            studentUser.addTask(task);
-                            System.out.println("Task added successfully.");
-                        }
-                        default -> {
-                            System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+        while (isRunning) {
+            System.out.println("Select your action: ");
+            if (user instanceof StudentUser studentUser) {
+                displayStudentMenu();
+                int action = scanner.nextInt();
+                scanner.nextLine();
+                switch (action) {
+                    case 1 -> addTask();
+                    case 2 -> removeTask();
+                    case 3 -> {
+                        System.out.print("Enter task index to mark as complete\n(if you're not sure, enter -1 and try \"View all Tasks\"): ");
+                        int index = scanner.nextInt();
+                        scanner.nextLine();
+                        if (index <= -1) {
                             return;
+                        } else if (index >= studentUser.getTaskManager().getTasks().size()) {
+                            System.out.println("Invalid index: " + index);
+                        } else {
+                            studentUser.markComplete(index);
                         }
                     }
-                }
-                case 2 -> {
-                    System.out.print("Enter task index to remove\n(if you're not sure, enter -1 and try \"View all Tasks\"): ");
-                    int index = scanner.nextInt();
-                    if (index <= -1) {
-                        return;
-                    } else if (index >= studentUser.getTaskManager().getTasks().size()) {
-                        System.out.println("Invalid index: " + index);
-                        return;
-                    } else {
-                        studentUser.deleteTask(index);
+                    case 4 -> user.displayAllTasks();
+                    case 5 -> {
+                        System.out.println("Sort by:\n1. Deadline\n2. Priority");
+                        int sortChoice = scanner.nextInt();
+                        scanner.nextLine();
+                        switch (sortChoice) {
+                            case 1 -> studentUser.sortByDeadline();
+                            case 2 -> studentUser.sortByPriority();
+                            default -> {
+                                System.out.println("Invalid choice.");
+                                return;
+                            }
+                        }
+                        System.out.println("Tasks sorted successfully.");
                     }
-                }
-                case 3 -> {
-                    System.out.print("Enter task index to mark as complete\n(if you're not sure, enter -1 and try \"View all Tasks\"): ");
-                    int index = scanner.nextInt();
-                    if (index <= -1) {
-                        return;
-                    } else if (index >= studentUser.getTaskManager().getTasks().size()) {
-                        System.out.println("Invalid index: " + index);
-                        return;
-                    } else {
-                        studentUser.markComplete(index);
-                    }
-                }
-                case 4 -> user.displayAllTasks();
-                case 5 -> {
-                    System.out.println("Sort by:\n1. Deadline\n2. Priority");
-                    int sortChoice = scanner.nextInt();
-                    switch (sortChoice) {
-                        case 1 -> studentUser.sortByDeadline();
-                        case 2 -> studentUser.sortByPriority();
-                        default -> {
-                            System.out.println("Invalid choice.");
-                            return;
+                    case 6 -> {
+                        System.out.print("Enter file path to load tasks or leave blank for default path: ");
+                        String filePath = scanner.nextLine();
+                        if (filePath.isEmpty()) {
+                            studentUser.loadTasks();
+                        } else {
+                            studentUser.loadTasks(filePath);
                         }
                     }
-                    System.out.println("Tasks sorted successfully.");
-                }
-                case 6 -> {
-                    System.out.print("Enter file path to load tasks or leave blank for default path: ");
-                    String filePath = scanner.nextLine();
-                    if (filePath.isEmpty()) {
-                        studentUser.loadTasks();
-                    } else {
-                        studentUser.loadTasks(filePath);
+                    case 7 -> {
+                        System.out.print("Enter file path to save tasks or leave blank for default path: ");
+                        String filePath = scanner.nextLine();
+                        if (filePath.isEmpty()) {
+                            studentUser.saveTasks();
+                        } else {
+                            studentUser.saveTasks(filePath);
+                        }
                     }
+                    case 8 -> user.undo();
+                    case 9 -> user.redo();
+                    case 0 -> isRunning = false;
+                    default -> System.out.println("Invalid choice. Please select a valid action.");
                 }
-                case 7 -> {
-                    System.out.print("Enter file path to save tasks or leave blank for default path: ");
-                    String filePath = scanner.nextLine();
-                    if (filePath.isEmpty()) {
-                        studentUser.saveTasks();
-                    } else {
-                        studentUser.saveTasks(filePath);
+            } else {
+                GuestUser guestUser = (GuestUser) user;
+                displayGuestMenu();
+                int action = scanner.nextInt();
+                scanner.nextLine();
+                switch (action) {
+                    case 1 -> {
+                        System.out.print("Enter file path to load tasks or leave blank for default path: ");
+                        String filePath = scanner.nextLine();
+                        if (filePath.isEmpty()) {
+                            guestUser.loadTasks("src/main/resources/tasks.csv");
+                        } else {
+                            guestUser.loadTasks(filePath);
+                        }
                     }
+                    case 2 -> user.displayAllTasks();
+                    case 3 -> guestUser.sortByDeadline();
+                    case 4 -> guestUser.sortByPriority();
+                    case 5 -> user.undo();
+                    case 6 -> user.redo();
+                    case 0 -> isRunning = false;
+                    default -> System.out.println("Invalid choice. Please select a valid action.");
                 }
-                case 8 -> user.undo();
-                case 9 -> user.redo();
-                case 0 -> System.exit(0);
-            }
-        } else {
-            GuestUser guestUser = (GuestUser) user;
-            displayGuestMenu();
-            int action = scanner.nextInt();
-            scanner.nextLine();
-            switch (action) {
-                case 1 -> {
-                    System.out.print("Enter file path to load tasks or leave blank for default path: ");
-                    String filePath = scanner.nextLine();
-                    if (filePath.isEmpty()) {
-                        guestUser.loadTasks("src/main/resources/tasks.csv");
-                    } else {
-                        guestUser.loadTasks(filePath);
-                    }
-                }
-                case 2 -> user.displayAllTasks();
-                case 3 -> guestUser.sortByDeadline();
-                case 4 -> guestUser.sortByPriority();
-                case 5 -> user.undo();
-                case 6 -> user.redo();
-                case 0 -> System.exit(0);
             }
         }
     }
@@ -174,5 +143,46 @@ public class Main {
         System.out.println("5. Undo");
         System.out.println("6. Redo");
         System.out.println("0. Exit");
+    }
+
+    public static void addTask() {
+        StudentUser studentUser = (StudentUser) user;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Is is urgent? (yes/no)");
+        String isUrgent = scanner.nextLine();
+        switch (isUrgent) {
+            case "yes" -> {
+                System.out.print("Enter task name: ");
+                String taskName = scanner.nextLine();
+                System.out.print("Enter task due date (yyyy-mm-dd): ");
+                String dueDate = scanner.nextLine();
+                LocalDate date = LocalDate.parse(dueDate);
+                Task task = new UrgentTask(taskName, date);
+                studentUser.addTask(task);
+                System.out.println("Task added successfully.");
+            }
+            case "no" -> {
+                System.out.print("Enter task name: ");
+                String taskName = scanner.nextLine();
+                Task task = new RegularTask(taskName);
+                studentUser.addTask(task);
+                System.out.println("Task added successfully.");
+            }
+            default -> System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+        }
+    }
+
+    public static void removeTask() {
+        StudentUser studentUser = (StudentUser) user;
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter task index to remove\n(if you're not sure, enter -1 and try \"View all Tasks\"): ");
+        int index = scanner.nextInt();
+        if (index <= -1) {
+            return;
+        } else if (index >= studentUser.getTaskManager().getTasks().size()) {
+            System.out.println("Invalid index: " + index);
+        } else {
+            studentUser.deleteTask(index);
+        }
     }
 }

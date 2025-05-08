@@ -103,7 +103,7 @@ public class StudentUser extends User {
      */
     @Override
     public void displayAllTasks() {
-        this.taskManager.viewTasks();
+        System.out.println(this.taskManager.viewTasks());
     }
 
     public long getStudentId() {
