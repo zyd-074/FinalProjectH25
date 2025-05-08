@@ -82,7 +82,7 @@ public class FileHandler {
                 String line = scanner.nextLine();
                 String[] parts = line.split(",");
                 if (parts[0].equals("regular")) {
-                    Task task = new RegularTask(parts[1]);
+                    Task task = new RegularTask(parts[1], LocalDate.parse(parts[2]));
                     task.setCreatedDate(LocalDate.parse(parts[2]));
                     task.setCompleted(Boolean.parseBoolean(parts[3]));
                     taskManager.addTask(task);

@@ -1,6 +1,5 @@
 package org.example.task;
 
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Objects;
@@ -11,6 +10,10 @@ public class RegularTask extends Task implements Comparable<Task> {
     public RegularTask(String title) {
         super(title);
         this.timePassed = ChronoUnit.DAYS.between(this.createdDate, LocalDate.now());
+    }
+    public RegularTask(String title, LocalDate createdDate) {
+        super(title);
+        this.timePassed = ChronoUnit.DAYS.between(createdDate, LocalDate.now());
     }
 
     @Override
@@ -29,11 +32,11 @@ public class RegularTask extends Task implements Comparable<Task> {
     }
 
     public long getTimePassed() {
-        return timePassed;
+        return ChronoUnit.DAYS.between(this.createdDate, LocalDate.now());
     }
 
-    public void updateTimePassed() {
-        this.timePassed = ChronoUnit.DAYS.between(this.createdDate, LocalDate.now());
+    public void setTimePassed(long timePassed) {
+        this.timePassed = timePassed;
     }
 
     @Override
