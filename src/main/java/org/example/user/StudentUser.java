@@ -1,5 +1,9 @@
 package org.example.user;
 
+import org.example.cmd.AddTaskCommand;
+import org.example.cmd.Command;
+import org.example.cmd.DeleteTaskCommand;
+import org.example.cmd.MarkCompleteCommand;
 import org.example.task.Task;
 import org.example.task.UrgentTask;
 
@@ -21,7 +25,9 @@ public class StudentUser extends User {
      */
     public void addTask(Task task) {
         if (task != null){
-            taskManager.addTask(task);
+            Command command = new AddTaskCommand(task, taskManager);
+            command.redo();
+            undoStack.push(command);
         } else {
             System.out.println("Invalid task");
         }
@@ -36,7 +42,9 @@ public class StudentUser extends User {
         if (idx < 0 || idx > taskManager.getTasks().size()) {
             System.out.println("Invalid index: " + idx);
         } else {
-            taskManager.getTasks().remove(idx);
+            Command command = new DeleteTaskCommand(taskManager.getTasks().get(idx), taskManager);
+            command.redo();
+            undoStack.push(command);
             System.out.println("Task successfully removed.");
         }
     }
@@ -50,7 +58,9 @@ public class StudentUser extends User {
             System.out.println("Invalid index: " + idx);
         } else {
             Task task = taskManager.getTasks().get(idx);
-            task.markComplete();
+            Command command = new MarkCompleteCommand(task);
+            command.redo();
+            undoStack.push(command);
             System.out.println("Task marked as complete.");
         }
     }
@@ -133,6 +143,4 @@ public class StudentUser extends User {
         return super.toString() +
                 "studentId=" + studentId;
     }
-
-
 }
