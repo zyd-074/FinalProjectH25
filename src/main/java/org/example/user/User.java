@@ -19,8 +19,6 @@ public abstract class User {
         this.taskManager = new TaskManager();
     }
 
-    public abstract void displayAllTasks();
-
     /**
      * Adds a command to the undo stack and push the redo stack.
      */

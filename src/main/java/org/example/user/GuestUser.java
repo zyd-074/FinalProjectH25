@@ -27,14 +27,6 @@ public class GuestUser extends User {
     }
 
     /**
-     * Displays all tasks in the task manager.
-     */
-    @Override
-    public void displayAllTasks() {
-        System.out.println(this.taskManager.viewTasks());
-    }
-
-    /**
      * Loads tasks to a file.
      * @param filePath the path to the file from which tasks will be loaded
      */

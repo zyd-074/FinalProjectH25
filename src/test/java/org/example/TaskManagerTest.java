@@ -71,20 +71,6 @@ class TaskManagerTest {
     }
 
     @Test
-    void viewTasks() {
-        TaskManager taskManager = new TaskManager();
-        Task task1 = new RegularTask("Test Task");
-        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
-
-        taskManager.addTask(task1);
-        taskManager.addTask(task2);
-
-        String expectedOutput = "title='Test Task', createdDate=" + LocalDate.now() + ", isCompleted=false, timePassed=0, index: 0\n" +
-                "title='Test 1', createdDate=" + LocalDate.now() + ", isCompleted=false, priority=HIGH, dueDate=2025-05-03, index: 1\n";
-        assertEquals(expectedOutput, taskManager.viewTasks());
-    }
-
-    @Test
     void sortTasks() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test 1");

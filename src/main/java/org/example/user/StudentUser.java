@@ -108,14 +108,6 @@ public class StudentUser extends User {
         System.out.println("Task successfully loaded");
     }
 
-    /**
-     * Displays all tasks in the task manager.
-     */
-    @Override
-    public void displayAllTasks() {
-        System.out.println(this.taskManager.viewTasks());
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

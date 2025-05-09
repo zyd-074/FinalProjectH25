@@ -1,7 +1,7 @@
 package org.example;
 
-import org.example.cmd.FileHandler;
 import org.example.task.Task;
+import org.example.utils.FileHandler;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -50,21 +50,6 @@ public class TaskManager{
         }
         task.markComplete();
         System.out.println("Task marked as complete.");
-    }
-
-    /**
-     * Displays all tasks in the task list.
-     */
-    public String viewTasks() {
-        String result = "";
-        if (tasks.isEmpty()) {
-            System.out.println("No tasks available.");
-            return "";
-        }
-        for (int i = 0; i < tasks.size(); i++) {
-            result += (tasks.get(i) + ", index: " + i + "\n");
-        }
-        return result;
     }
 
     /**

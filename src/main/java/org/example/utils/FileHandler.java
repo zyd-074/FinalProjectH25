@@ -1,8 +1,8 @@
-package org.example.cmd;
+package org.example.utils;
 
+import org.example.TaskManager;
 import org.example.task.RegularTask;
 import org.example.task.Task;
-import org.example.TaskManager;
 import org.example.task.UrgentTask;
 
 import java.io.File;
@@ -29,8 +29,20 @@ public class FileHandler {
      * @param filePath the path to the file where tasks will be saved
      */
     public static void saveTasks(List<Task> tasks, String filePath) {
+        File file = new File(filePath);
+        if (!file.getParentFile().exists()) {
+            file.getParentFile().mkdirs();
+        }
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
         //Reinitialize the file
-        try (FileWriter fileWriter = new FileWriter(filePath)) {
+        try (FileWriter fileWriter = new FileWriter(file)) {
             fileWriter.write("");
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -39,7 +51,7 @@ public class FileHandler {
         //Write
         for (Task task : tasks) {
             if (task instanceof RegularTask regularTask) {
-                try (FileWriter fileWriter = new FileWriter(filePath, true)) {
+                try (FileWriter fileWriter = new FileWriter(file, true)) {
                     fileWriter.write("regular" +
                             "," + regularTask.getTitle() +
                             "," + regularTask.getCreatedDate() +
@@ -49,7 +61,7 @@ public class FileHandler {
                     throw new RuntimeException(e);
                 }
             } else if (task instanceof UrgentTask urgentTask) {
-                try (FileWriter fileWriter = new FileWriter(filePath, true)) {
+                try (FileWriter fileWriter = new FileWriter(file, true)) {
                     fileWriter.write("urgent" +
                             "," + urgentTask.getTitle() +
                             "," + urgentTask.getCreatedDate() +

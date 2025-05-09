@@ -6,6 +6,7 @@ import org.example.task.UrgentTask;
 import org.example.user.GuestUser;
 import org.example.user.StudentUser;
 import org.example.user.User;
+import org.example.utils.TaskDisplay;
 
 import java.time.LocalDate;
 import java.util.Scanner;
@@ -59,7 +60,7 @@ public class Main {
                             studentUser.markComplete(index);
                         }
                     }
-                    case 4 -> user.displayAllTasks();
+                    case 4 -> TaskDisplay.viewTasks(user.getTaskManager().getTasks());
                     case 5 -> {
                         System.out.println("Sort by:\n1. Deadline\n2. Priority");
                         int sortChoice = scanner.nextInt();
@@ -112,7 +113,7 @@ public class Main {
                             guestUser.loadTasks(filePath);
                         }
                     }
-                    case 2 -> user.displayAllTasks();
+                    case 2 -> TaskDisplay.viewTasks(user.getTaskManager().getTasks());
                     case 3 -> guestUser.sortByDeadline();
                     case 4 -> guestUser.sortByPriority();
                     case 0 -> isRunning = false;
