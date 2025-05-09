@@ -1,10 +1,7 @@
 package org.example.user;
 
-import org.example.cmd.FileHandler;
-import org.example.task.Task;
 import org.example.task.UrgentTask;
 
-import java.util.List;
 import java.util.Objects;
 
 public class GuestUser extends User {

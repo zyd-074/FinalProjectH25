@@ -1,9 +1,6 @@
 package org.example.task;
 
-import javax.swing.text.DateFormatter;
-import java.text.DateFormat;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -17,7 +14,7 @@ public class UrgentTask extends Task {
         this.priority = priority;
     }
 
-    public static enum Priority {
+    public enum Priority {
         HIGH, MEDIUM, LOW
     }
 
@@ -85,13 +82,5 @@ public class UrgentTask extends Task {
 
     public LocalDate getDueDate() {
         return dueDate;
-    }
-
-    public void setDueDate(LocalDate dueDate) {
-        this.dueDate = dueDate;
-    }
-
-    public void setPriority(Priority priority) {
-        this.priority = priority;
     }
 }

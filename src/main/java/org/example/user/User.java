@@ -72,31 +72,7 @@ public abstract class User {
         return username;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public Stack<Command> getUndoStack() {
-        return undoStack;
-    }
-
-    public void setUndoStack(Stack<Command> undoStack) {
-        this.undoStack = undoStack;
-    }
-
-    public Stack<Command> getRedoStack() {
-        return redoStack;
-    }
-
-    public void setRedoStack(Stack<Command> redoStack) {
-        this.redoStack = redoStack;
-    }
-
     public TaskManager getTaskManager() {
         return taskManager;
-    }
-
-    public void setTaskManager(TaskManager taskManager) {
-        this.taskManager = taskManager;
     }
 }

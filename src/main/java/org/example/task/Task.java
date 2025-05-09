@@ -32,10 +32,6 @@ public abstract class Task {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public LocalDate getCreatedDate() {
         return createdDate;
     }

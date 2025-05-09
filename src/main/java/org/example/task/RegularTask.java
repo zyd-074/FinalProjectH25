@@ -35,10 +35,6 @@ public class RegularTask extends Task implements Comparable<Task> {
         return ChronoUnit.DAYS.between(this.createdDate, LocalDate.now());
     }
 
-    public void setTimePassed(long timePassed) {
-        this.timePassed = timePassed;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

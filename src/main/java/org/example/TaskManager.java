@@ -26,13 +26,6 @@ public class TaskManager{
     }
 
     /**
-     * Clears all tasks from the task list.
-     */
-    public void clearTasks() {
-        this.tasks.clear();
-    }
-
-    /**
      * Removes a task from the task list.
      * @param task the task to be removed
      */
@@ -132,9 +125,5 @@ public class TaskManager{
 
     public List<Task> getTasks() {
         return tasks;
-    }
-
-    public void setTasks(List<Task> tasks) {
-        this.tasks = tasks;
     }
 }

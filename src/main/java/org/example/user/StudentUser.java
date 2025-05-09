@@ -116,14 +116,6 @@ public class StudentUser extends User {
         System.out.println(this.taskManager.viewTasks());
     }
 
-    public long getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(long studentId) {
-        this.studentId = studentId;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
