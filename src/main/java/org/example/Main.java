@@ -156,6 +156,10 @@ public class Main {
                 String taskName = scanner.nextLine();
                 System.out.print("Enter task due date (yyyy-mm-dd): ");
                 String dueDate = scanner.nextLine();
+                while (!dateIsValid(dueDate)) {
+                    System.out.print("Invalid date format. Please enter a valid date (yyyy-mm-dd): ");
+                    dueDate = scanner.nextLine();
+                }
                 LocalDate date = LocalDate.parse(dueDate);
                 while (date.isBefore(LocalDate.now())) {
                     System.out.print("Due date cannot be in the past. Please enter a valid date (yyyy-mm-dd): ");
@@ -195,6 +199,15 @@ public class Main {
             System.out.println("Invalid index: " + index);
         } else {
             studentUser.deleteTask(index);
+        }
+    }
+
+    public static boolean dateIsValid(String date) {
+        try {
+            LocalDate.parse(date);
+            return true;
+        } catch (Exception e) {
+            return false;
         }
     }
 }
