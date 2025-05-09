@@ -68,8 +68,8 @@ public class TaskManager{
             System.out.println("No tasks available.");
             return "";
         }
-        for (Task task : tasks) {
-            result += (task + "\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            result += (tasks.get(i) + ", index: " + i + "\n");
         }
         return result;
     }

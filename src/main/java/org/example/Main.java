@@ -24,7 +24,7 @@ public class Main {
                 String username = scanner.nextLine();
                 user = new StudentUser(username);
                 System.out.println("User created successfully.");
-                System.out.println("Welcome " + user.getUsername() + "!");
+                System.out.println("Welcome, " + user.getUsername() + "!");
             }
             case 2 -> {
                 System.out.print("Enter your username:");
@@ -150,6 +150,10 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Is is urgent? (yes/no)");
         String isUrgent = scanner.nextLine();
+        while (!isUrgent.equalsIgnoreCase("yes") && !isUrgent.equalsIgnoreCase("no")) {
+            System.out.println("Invalid input. Please enter 'yes' or 'no'.");
+            isUrgent = scanner.nextLine();
+        }
         switch (isUrgent) {
             case "yes" -> {
                 System.out.print("Enter task name: ");
@@ -157,8 +161,20 @@ public class Main {
                 System.out.print("Enter task due date (yyyy-mm-dd): ");
                 String dueDate = scanner.nextLine();
                 LocalDate date = LocalDate.parse(dueDate);
+                while (date.isBefore(LocalDate.now())) {
+                    System.out.print("Due date cannot be in the past. Please enter a valid date (yyyy-mm-dd): ");
+                    dueDate = scanner.nextLine();
+                    date = LocalDate.parse(dueDate);
+                }
                 System.out.println("Enter the priority level (LOW, MEDIUM or HIGH)");
-                UrgentTask.Priority priority = UrgentTask.Priority.valueOf(scanner.nextLine().toUpperCase());
+                String priorityLevel = scanner.nextLine();
+                while (!priorityLevel.equalsIgnoreCase("LOW")
+                        && !priorityLevel.equalsIgnoreCase("MEDIUM")
+                        && !priorityLevel.equalsIgnoreCase("HIGH")) {
+                    System.out.println("Invalid priority level. Please enter LOW, MEDIUM or HIGH:");
+                    priorityLevel = scanner.nextLine();
+                }
+                UrgentTask.Priority priority = UrgentTask.Priority.valueOf(priorityLevel.toUpperCase());
                 Task task = new UrgentTask(taskName, date, priority);
                 studentUser.addTask(task);
                 System.out.println("Task added successfully.");

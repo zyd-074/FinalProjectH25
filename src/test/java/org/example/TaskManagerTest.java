@@ -16,10 +16,10 @@ class TaskManagerTest {
     void addTask() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test Task");
-        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3));
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
         Task task3 = new RegularTask("Test 2");
         Task task4 = new RegularTask("Test 3");
-        Task task5 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 2));
+        Task task5 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 2), UrgentTask.Priority.LOW);
 
         taskManager.addTask(task1);
         taskManager.addTask(task2);
@@ -39,7 +39,7 @@ class TaskManagerTest {
     void removeTask() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test Task");
-        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3));
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
         Task task3 = new RegularTask("Test 2");
 
         taskManager.addTask(task1);
@@ -57,7 +57,7 @@ class TaskManagerTest {
     void markTaskComplete() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test Task");
-        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3));
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
 
         taskManager.addTask(task1);
         taskManager.addTask(task2);
@@ -74,13 +74,13 @@ class TaskManagerTest {
     void viewTasks() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test Task");
-        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3));
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
 
         taskManager.addTask(task1);
         taskManager.addTask(task2);
 
-        String expectedOutput = "title='Test Task', createdDate=2025-05-01, isCompleted=false, timePassed=0\n" +
-                "title='Test 1', createdDate=2025-05-01, isCompleted=false, priority=UNDER7DAYS, dueDate=2025-05-03\n";
+        String expectedOutput = "title='Test Task', createdDate=" + LocalDate.now() + ", isCompleted=false, timePassed=0, index: 0\n" +
+                "title='Test 1', createdDate=" + LocalDate.now() + ", isCompleted=false, priority=HIGH, dueDate=2025-05-03, index: 1\n";
         assertEquals(expectedOutput, taskManager.viewTasks());
     }
 
@@ -88,10 +88,10 @@ class TaskManagerTest {
     void sortTasks() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test 1");
-        Task task2 = new UrgentTask("Test 2", LocalDate.of(2025, 5, 3));
+        Task task2 = new UrgentTask("Test 2", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
         Task task3 = new RegularTask("Test 3");
         Task task4 = new RegularTask("Test 4");
-        Task task5 = new UrgentTask("Test 5", LocalDate.of(2025, 5, 3));
+        Task task5 = new UrgentTask("Test 5", LocalDate.of(2025, 5, 3), UrgentTask.Priority.LOW);
 
         taskManager.addTask(task1);
         taskManager.addTask(task2);
@@ -102,14 +102,14 @@ class TaskManagerTest {
         assertEquals(5, taskManager.getTasks().size());
 
         taskManager.sortTasks(new UrgentTask.TaskPriorityComparator());
-        assertEquals(task5, taskManager.getTasks().getFirst());
+        assertEquals(task2, taskManager.getTasks().getFirst());
     }
 
     @Test
     void searchTasks() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test Task");
-        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3));
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
 
         taskManager.addTask(task1);
         taskManager.addTask(task2);
@@ -122,7 +122,7 @@ class TaskManagerTest {
     void saveToFile() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test Task");
-        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3));
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
 
         taskManager.addTask(task1);
         taskManager.addTask(task2);
@@ -138,8 +138,13 @@ class TaskManagerTest {
     @Test
     void loadFromFile() {
         TaskManager taskManager = new TaskManager();
+        Task task1 = new RegularTask("Test Task");
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
+
         String filePath = "src/main/resources/tasks.csv";
         taskManager.loadFromFile(filePath);
-        System.out.println(taskManager.viewTasks());
+        assertEquals(2, taskManager.getTasks().size());
+        assertEquals(task1, taskManager.getTasks().get(0));
+        assertEquals(task2, taskManager.getTasks().get(1));
     }
 }

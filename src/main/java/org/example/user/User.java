@@ -6,7 +6,7 @@ import org.example.cmd.Command;
 import java.util.Objects;
 import java.util.Stack;
 
-public abstract class User{
+public abstract class User {
     protected String username;
     protected Stack<Command> undoStack;
     protected Stack<Command> redoStack;
