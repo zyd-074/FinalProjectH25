@@ -115,8 +115,6 @@ public class Main {
                     case 2 -> user.displayAllTasks();
                     case 3 -> guestUser.sortByDeadline();
                     case 4 -> guestUser.sortByPriority();
-                    case 5 -> user.undo();
-                    case 6 -> user.redo();
                     case 0 -> isRunning = false;
                     default -> System.out.println("Invalid choice. Please select a valid action.");
                 }
@@ -140,8 +138,6 @@ public class Main {
         System.out.println("2. View All Tasks");
         System.out.println("3. Sort Tasks by Deadline");
         System.out.println("4. Sort Tasks by Priority");
-        System.out.println("5. Undo");
-        System.out.println("6. Redo");
         System.out.println("0. Exit");
     }
 
@@ -195,9 +191,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Enter task index to remove\n(if you're not sure, enter -1 and try \"View all Tasks\"): ");
         int index = scanner.nextInt();
-        if (index <= -1) {
-            return;
-        } else if (index >= studentUser.getTaskManager().getTasks().size()) {
+        if (index >= studentUser.getTaskManager().getTasks().size()) {
             System.out.println("Invalid index: " + index);
         } else {
             studentUser.deleteTask(index);
