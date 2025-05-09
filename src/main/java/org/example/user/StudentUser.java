@@ -1,9 +1,6 @@
 package org.example.user;
 
-import org.example.cmd.AddTaskCommand;
-import org.example.cmd.Command;
-import org.example.cmd.DeleteTaskCommand;
-import org.example.cmd.MarkCompleteCommand;
+import org.example.cmd.*;
 import org.example.task.Task;
 import org.example.task.UrgentTask;
 
@@ -59,9 +56,19 @@ public class StudentUser extends User {
         } else {
             Task task = taskManager.getTasks().get(idx);
             Command command = new MarkCompleteCommand(task);
-            command.redo();
             undoStack.push(command);
             System.out.println("Task marked as complete.");
+        }
+    }
+
+    public void markIncomplete(int idx) {
+        if (idx < 0 || idx > taskManager.getTasks().size()) {
+            System.out.println("Invalid index: " + idx);
+        } else {
+            Task task = taskManager.getTasks().get(idx);
+            Command command = new MarkIncompleteCommand(task);
+            undoStack.push(command);
+            System.out.println("Task marked as incomplete.");
         }
     }
 

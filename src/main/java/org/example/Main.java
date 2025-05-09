@@ -48,18 +48,7 @@ public class Main {
                 switch (action) {
                     case 1 -> addTask();
                     case 2 -> removeTask();
-                    case 3 -> {
-                        System.out.print("Enter task index to mark as complete\n(if you're not sure, enter -1 and try \"View all Tasks\"): ");
-                        int index = scanner.nextInt();
-                        scanner.nextLine();
-                        if (index <= -1) {
-                            return;
-                        } else if (index >= studentUser.getTaskManager().getTasks().size()) {
-                            System.out.println("Invalid index: " + index);
-                        } else {
-                            studentUser.markComplete(index);
-                        }
-                    }
+                    case 3 -> markComplete();
                     case 4 -> TaskDisplay.viewTasks(user.getTaskManager().getTasks());
                     case 5 -> {
                         System.out.println("Sort by:\n1. Deadline\n2. Priority");
@@ -209,6 +198,25 @@ public class Main {
             return true;
         } catch (Exception e) {
             return false;
+        }
+    }
+
+    public static void markComplete() {
+        Scanner scanner = new Scanner(System.in);
+        StudentUser studentUser = (StudentUser) user;
+        System.out.print("Enter task index to mark\n(if you're not sure, enter -1 and try \"View all Tasks\"): ");
+        int index = scanner.nextInt();
+        scanner.nextLine();
+        if (index >= studentUser.getTaskManager().getTasks().size()) {
+            System.out.println("Invalid index: " + index);
+        } else {
+            System.out.println("Would you like to mark this task as complete or incomplete? (complete/incomplete)");
+            String mark = scanner.nextLine();
+            switch (mark.toLowerCase()) {
+                case "complete" -> studentUser.markComplete(index);
+                case "incomplete" -> studentUser.markIncomplete(index);
+                default -> System.out.println("Invalid input. Please enter 'complete' or 'incomplete'.");
+            }
         }
     }
 }

@@ -52,6 +52,15 @@ public class TaskManager{
         System.out.println("Task marked as complete.");
     }
 
+    public void markTaskIncomplete(Task task) {
+        if (task == null || !this.tasks.contains(task)) {
+            System.out.println("Task not found");
+            return;
+        }
+        task.markIncomplete();
+        System.out.println("Task marked as incomplete.");
+    }
+
     /**
      * Sorts the tasks in the task list using the provided comparator.
      * @param comparator the comparator to be used for sorting

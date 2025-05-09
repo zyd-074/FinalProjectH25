@@ -15,7 +15,7 @@ public class MarkCompleteCommand implements Command {
      */
     @Override
     public void undo() {
-        task.setCompleted(false);
+        task.markIncomplete();
     }
 
     /**

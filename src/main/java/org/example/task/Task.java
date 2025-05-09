@@ -21,6 +21,10 @@ public abstract class Task {
         this.isCompleted = true;
     }
 
+    public void markIncomplete() {
+        this.isCompleted = false;
+    }
+
     @Override
     public String toString() {
         return "title='" + title + '\'' +
