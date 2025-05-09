@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class Main {
     private static boolean isRunning = true;
-    static User user;
+    public static User user;
     public static void main(String[] args) {
         System.out.println("Select your identity: \n1. Student\n2. Guest");
         Scanner scanner = new Scanner(System.in);
