@@ -105,9 +105,9 @@ public class TaskManager{
      */
     public void saveToFile(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
-            System.out.println("Invalid file path");
+            FileHandler.saveTasks(tasks);
         }
-        FileHandler.saveTasks(tasks);
+        FileHandler.saveTasks(tasks, filePath);
         System.out.println("Tasks saved to file: " + filePath);
     }
 
@@ -117,7 +117,7 @@ public class TaskManager{
      */
     public void loadFromFile(String filePath) {
         if (filePath == null || filePath.isEmpty()) {
-            System.out.println("Invalid file path");
+            this.tasks = FileHandler.loadTasks();
         }
         this.tasks = FileHandler.loadTasks(filePath);
         System.out.println("Tasks loaded from file: " + filePath);

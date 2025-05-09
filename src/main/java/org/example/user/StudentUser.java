@@ -10,7 +10,7 @@ import org.example.task.UrgentTask;
 import java.util.Objects;
 
 public class StudentUser extends User {
-    private long studentId;
+    private final long studentId;
     private static long nextID = 20000;
 
     public StudentUser(String username) {
