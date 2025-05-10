@@ -58,9 +58,9 @@ public class UrgentTask extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + ", " +
-                "priority=" + priority +
-                ", dueDate=" + dueDate;
+        return super.toString() +
+                "Priority: " + priority +
+                " | Due Date: " + dueDate;
     }
 
     @Override

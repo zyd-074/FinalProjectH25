@@ -22,7 +22,7 @@ public class TaskDisplay {
                     System.out.println("No tasks available.");
                 }
                 for (int i = 0; i < tasks.size(); i++) {
-                    result += (tasks.get(i) + ", index: " + i + "\n");
+                    result += ("[Index: " + i + "] | " + tasks.get(i).toString() + "\n");
                 }
             }
             case 2-> {

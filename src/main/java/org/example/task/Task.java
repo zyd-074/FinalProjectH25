@@ -27,9 +27,9 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "title='" + title + '\'' +
-                ", createdDate=" + createdDate +
-                ", isCompleted=" + isCompleted;
+        return "Title: " + title + " | " +
+                "Created Date: " + createdDate + " | " +
+                "Completed: " + isCompleted + " | ";
     }
 
     public String getTitle() {

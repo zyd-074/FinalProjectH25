@@ -27,8 +27,8 @@ public class RegularTask extends Task implements Comparable<Task> {
 
     @Override
     public String toString() {
-        return super.toString() + ", " +
-                "Days Passed=" + timePassed;
+        return super.toString() +
+                "Days Passed: " + timePassed;
     }
 
     public long getTimePassed() {
