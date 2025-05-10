@@ -18,8 +18,6 @@ public class UrgentTask extends Task {
         HIGH, MEDIUM, LOW
     }
 
-
-
     /**
      * Compares two tasks based on their priority.
      */

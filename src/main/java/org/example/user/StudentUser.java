@@ -42,7 +42,6 @@ public class StudentUser extends User {
             Command command = new DeleteTaskCommand(taskManager.getTasks().get(idx), taskManager);
             command.redo();
             undoStack.push(command);
-            System.out.println("Task successfully removed.");
         }
     }
 
@@ -61,6 +60,10 @@ public class StudentUser extends User {
         }
     }
 
+    /**
+     * Marks a task as incomplete.
+     * @param idx the index of the task to be marked as incomplete
+     */
     public void markIncomplete(int idx) {
         if (idx < 0 || idx > taskManager.getTasks().size()) {
             System.out.println("Invalid index: " + idx);

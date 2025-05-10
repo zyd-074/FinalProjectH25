@@ -57,7 +57,7 @@ class TaskManagerTest {
     void markTaskComplete() {
         TaskManager taskManager = new TaskManager();
         Task task1 = new RegularTask("Test Task");
-        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 3), UrgentTask.Priority.HIGH);
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 10), UrgentTask.Priority.HIGH);
 
         taskManager.addTask(task1);
         taskManager.addTask(task2);
@@ -68,6 +68,22 @@ class TaskManagerTest {
         taskManager.markTaskComplete(task1);
         assertTrue(task1.isCompleted());
         assertFalse(task2.isCompleted());
+    }
+
+    @Test
+    void markTaskIncomplete() {
+        TaskManager taskManager = new TaskManager();
+        Task task1 = new RegularTask("Test Task");
+        Task task2 = new UrgentTask("Test 1", LocalDate.of(2025, 5, 10), UrgentTask.Priority.HIGH);
+
+        taskManager.addTask(task1);
+        taskManager.addTask(task2);
+
+        taskManager.markTaskComplete(task1);
+        assertTrue(task1.isCompleted());
+
+        taskManager.markTaskIncomplete(task1);
+        assertFalse(task1.isCompleted());
     }
 
     @Test

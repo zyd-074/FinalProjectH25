@@ -14,12 +14,16 @@ import java.util.Scanner;
 public class Main {
     private static boolean isRunning = true;
     public static User user;
+
     public static void main(String[] args) {
-        System.out.println("Select your identity: \n1. Student\n2. Guest");
         Scanner scanner = new Scanner(System.in);
+
+        // Choose User type
+        System.out.println("Select your identity: \n1. Student\n2. Guest");
         int choice = scanner.nextInt();
         scanner.nextLine();
         switch (choice) {
+            //Student
             case 1 -> {
                 System.out.print("Enter your username:");
                 String username = scanner.nextLine();
@@ -27,6 +31,7 @@ public class Main {
                 System.out.println("User created successfully.");
                 System.out.println("Welcome, " + user.getUsername() + "!");
             }
+            //Guest
             case 2 -> {
                 System.out.print("Enter your username:");
                 String username = scanner.nextLine();

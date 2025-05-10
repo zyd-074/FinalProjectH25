@@ -21,6 +21,9 @@ public abstract class Task {
         this.isCompleted = true;
     }
 
+    /**
+     * Marks the task as not completed.
+     */
     public void markIncomplete() {
         this.isCompleted = false;
     }
