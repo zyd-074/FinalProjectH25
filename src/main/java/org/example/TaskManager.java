@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-public class TaskManager{
+public class TaskManager {
     private List<Task> tasks;
 
     public TaskManager() {
@@ -40,7 +40,6 @@ public class TaskManager{
 
     /**
      * Marks a task as complete.
-     *
      * @param task the task to be marked as complete
      */
     public void markTaskComplete(Task task) {
@@ -52,6 +51,10 @@ public class TaskManager{
         System.out.println("Task marked as complete.");
     }
 
+    /**
+     * Marks a task as incomplete.
+     * @param task the task to be marked as incomplete
+     */
     public void markTaskIncomplete(Task task) {
         if (task == null || !this.tasks.contains(task)) {
             System.out.println("Task not found");

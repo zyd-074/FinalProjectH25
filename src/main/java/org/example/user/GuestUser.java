@@ -7,6 +7,7 @@ import java.util.Objects;
 public class GuestUser extends User {
     private final long guestId;
     private static long nextID = 10001;
+
     public GuestUser(String username) {
         super(username);
         this.guestId = nextID++;

@@ -23,6 +23,7 @@ public class FileHandler {
     public static void saveTasks(List<Task> tasks) {
         saveTasks(tasks, filePath);
     }
+
     /**
      * Saves tasks to a file to a specific path.
      * @param tasks the list of tasks to be saved

@@ -44,8 +44,11 @@ public class Main {
                 return;
             }
         }
+
+        // Main menu
         while (isRunning) {
             System.out.println("Select your action: ");
+            //If user is Student
             if (user instanceof StudentUser studentUser) {
                 displayStudentMenu();
                 int action = scanner.nextInt();
@@ -89,15 +92,17 @@ public class Main {
                     }
                     case 8 -> user.undo();
                     case 9 -> user.redo();
-                    case 0 -> isRunning = false;
+                    case 0 -> isRunning = false;       //Exit
                     default -> System.out.println("Invalid choice. Please select a valid action.");
                 }
+                //If user is Guest
             } else {
                 GuestUser guestUser = (GuestUser) user;
                 displayGuestMenu();
                 int action = scanner.nextInt();
                 scanner.nextLine();
                 switch (action) {
+                    //Load tasks from file
                     case 1 -> {
                         System.out.print("Enter file path to load tasks or leave blank for default path: ");
                         String filePath = scanner.nextLine();
@@ -110,12 +115,16 @@ public class Main {
                     case 2 -> TaskDisplay.viewTasks(user.getTaskManager().getTasks());
                     case 3 -> guestUser.sortByDeadline();
                     case 4 -> guestUser.sortByPriority();
-                    case 0 -> isRunning = false;
+                    case 0 -> isRunning = false;    //Exit
                     default -> System.out.println("Invalid choice. Please select a valid action.");
                 }
             }
         }
     }
+
+    /**
+     * Displays the menu for the Student user.
+     */
     public static void displayStudentMenu() {
         System.out.println("1. Add Task");
         System.out.println("2. Remove Task");
@@ -128,6 +137,10 @@ public class Main {
         System.out.println("9. Redo");
         System.out.println("0. Exit");
     }
+
+    /**
+     * Displays the menu for the Guest user.
+     */
     public static void displayGuestMenu() {
         System.out.println("1. Load Tasks from File");
         System.out.println("2. View All Tasks");
@@ -136,6 +149,9 @@ public class Main {
         System.out.println("0. Exit");
     }
 
+    /**
+     * User interaction to add a task.
+     */
     public static void addTask() {
         StudentUser studentUser = (StudentUser) user;
         Scanner scanner = new Scanner(System.in);
@@ -151,11 +167,13 @@ public class Main {
                 String taskName = scanner.nextLine();
                 System.out.print("Enter task due date (yyyy-mm-dd): ");
                 String dueDate = scanner.nextLine();
+                //Check if date is valid
                 while (!dateIsValid(dueDate)) {
                     System.out.print("Invalid date format. Please enter a valid date (yyyy-mm-dd): ");
                     dueDate = scanner.nextLine();
                 }
                 LocalDate date = LocalDate.parse(dueDate);
+                //Check if date is in the past
                 while (date.isBefore(LocalDate.now())) {
                     System.out.print("Due date cannot be in the past. Please enter a valid date (yyyy-mm-dd): ");
                     dueDate = scanner.nextLine();
@@ -185,6 +203,9 @@ public class Main {
         }
     }
 
+    /**
+     * User interaction to remove a task.
+     */
     public static void removeTask() {
         StudentUser studentUser = (StudentUser) user;
         Scanner scanner = new Scanner(System.in);
@@ -197,6 +218,11 @@ public class Main {
         }
     }
 
+    /**
+     * Checks if the date is valid.
+     * @param date the date string to check
+     * @return true if the date is valid, false otherwise
+     */
     public static boolean dateIsValid(String date) {
         try {
             LocalDate.parse(date);
@@ -206,6 +232,9 @@ public class Main {
         }
     }
 
+    /**
+     * User interaction to mark a task as complete or incomplete.
+     */
     public static void markComplete() {
         Scanner scanner = new Scanner(System.in);
         StudentUser studentUser = (StudentUser) user;

@@ -11,6 +11,7 @@ public class RegularTask extends Task implements Comparable<Task> {
         super(title);
         this.timePassed = ChronoUnit.DAYS.between(this.createdDate, LocalDate.now());
     }
+
     public RegularTask(String title, LocalDate createdDate) {
         super(title);
         this.timePassed = ChronoUnit.DAYS.between(createdDate, LocalDate.now());

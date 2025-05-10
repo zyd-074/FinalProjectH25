@@ -25,10 +25,10 @@ public class TaskDisplay {
                     result += ("[Index: " + i + "] | " + tasks.get(i).toString() + "\n");
                 }
             }
-            case 2-> {
+            case 2 -> {
                 System.out.print("Enter the keyword to search for:");
                 String keyword = scanner.nextLine();
-                List<Task> searchTasks =  Main.user.getTaskManager().searchTasks(keyword);
+                List<Task> searchTasks = Main.user.getTaskManager().searchTasks(keyword);
                 for (int i = 0; i < searchTasks.size(); i++) {
                     result += (searchTasks.get(i) + ", index: " + i + "\n");
                 }

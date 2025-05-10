@@ -17,11 +17,10 @@ public class StudentUser extends User {
 
     /**
      * Adds a task to the task manager.
-     *
      * @param task the task to be added
      */
     public void addTask(Task task) {
-        if (task != null){
+        if (task != null) {
             Command command = new AddTaskCommand(task, taskManager);
             command.redo();
             undoStack.push(command);
@@ -32,7 +31,6 @@ public class StudentUser extends User {
 
     /**
      * Deletes a task from the task manager.
-     *
      * @param idx the index of the task to be deleted
      */
     public void deleteTask(int idx) {
@@ -96,6 +94,7 @@ public class StudentUser extends User {
     public void saveTasks(String filePath) {
         taskManager.saveToFile(filePath);
     }
+
     /**
      * Saves tasks to a file.
      */
@@ -109,6 +108,7 @@ public class StudentUser extends User {
     public void loadTasks() {
         this.loadTasks("src/main/resources/tasks.csv");
     }
+
     /**
      * Loads tasks from a specified file path.
      * @param filePath the path to the file from which tasks will be loaded
